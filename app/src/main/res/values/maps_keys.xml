@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="openStreetMapKey">https://api.maptiler.com/maps/openstreetmap/style.json?key=f5zwHVm4noZoKlkPQsAG</string>
+    <string name="mapTilerKey">https://api.maptiler.com/maps/streets-v2/style.json?key=f5zwHVm4noZoKlkPQsAG</string>
+    <string name="globeKey">mapbox://styles/mapbox/streets-v12</string>
+    <string name="globe3dKey">mapbox://styles/bafi/clizk5qjc01bg01pf3q0zgp0y</string>
+
+
+
+</resources>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CityEvents</string>
+    <string name="mapbox_access_token">sk.eyJ1IjoiYmFmaSIsImEiOiJjbGl5aWpxNHQwMTEwM3NsNDFtbjQ1MDc1In0.zwa3M2vaGydZJobnwjF06g</string>
+
+    <string name="mode">Mode</string>
+    <string name="account">Account</string>
+    <string name="Events">Events</string>
+
+
+    <string name="location_permission">Exact location is needed. App will be closed</string>
+
+    <!--Location Service Notification-->
+    <string name="around_running">CityEvents Running!</string>
+    <string name="stop_and_exit">Stop and exit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
