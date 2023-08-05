@@ -8,11 +8,10 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.example.around.mapbox.Compass
 import com.example.cityevents.MainApp
 import com.example.cityevents.MainViewModel
 import com.example.cityevents.R
-import com.example.cityevents.fragments.MainFragment
+import com.example.cityevents.fragments.mainFragment.MainFragment
 import com.example.cityevents.mapbox.location.LocationModel
 import com.example.cityevents.mapbox.location.LocationPermissionManager
 import com.example.cityevents.mapbox.location.LocationService
@@ -53,7 +52,7 @@ class MapManager(private val mainFragment: MainFragment, private val mapView: Ma
 
     private fun updateMap(locModel: LocationModel) {
         if (isFirstStart) {
-            Compass(mainFragment.requireContext(), mapView, locModel.lastLocation).add()
+            Compass(mapView, locModel.lastLocation).add()
             isFirstStart = false
         }
     }
@@ -93,9 +92,5 @@ class MapManager(private val mainFragment: MainFragment, private val mapView: Ma
         val locFilter = IntentFilter(LocationService.LOC_MODEL_INTENT)
         LocalBroadcastManager.getInstance(mainFragment.activity as AppCompatActivity)
             .registerReceiver(broadcastReceiver, locFilter)
-    }
-
-    companion object {
-        const val RESOLUTION = 11
     }
 }

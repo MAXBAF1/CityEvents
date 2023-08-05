@@ -12,7 +12,9 @@
     <!--Location Service Notification-->
     <string name="around_running">CityEvents Running!</string>
     <string name="stop_and_exit">Stop and exit</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_event">Add event</string>
+
 
 </resources>

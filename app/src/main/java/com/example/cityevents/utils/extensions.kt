@@ -3,7 +3,10 @@ package com.example.cityevents.utils
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.PorterDuff
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.widget.Toast
@@ -24,10 +27,8 @@ fun AppCompatActivity.openFragment(f: Fragment) {
     if (supportFragmentManager.fragments.isNotEmpty() && supportFragmentManager.fragments[0].javaClass == f.javaClass) return
 
     supportFragmentManager.beginTransaction()
-        .setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_up)
-        .replace(R.id.placeHolder, f)
-        .addToBackStack(null)
-        .commit()
+        .setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_up).replace(R.id.placeHolder, f)
+        .addToBackStack(null).commit()
 }
 
 fun Fragment.showToast(string: String) {
@@ -46,6 +47,22 @@ fun Drawable.setColor(context: Context, colorResId: Int) {
     val wrappedDrawable = DrawableCompat.wrap(this.mutate())
     DrawableCompat.setTint(wrappedDrawable, color)
     DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
+}
+
+fun Drawable.toBitmap(): Bitmap? {
+    if (this is BitmapDrawable) {
+        return this.bitmap
+    } else {
+        val constantState = this.constantState ?: return null
+        val drawable = constantState.newDrawable().mutate()
+        val bitmap: Bitmap = Bitmap.createBitmap(
+            drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmap
+    }
 }
 
 inline fun <reified T : Serializable> Intent.serializable(key: String): T? = when {

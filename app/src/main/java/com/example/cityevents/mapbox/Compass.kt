@@ -1,9 +1,6 @@
-package com.example.around.mapbox
+package com.example.cityevents.mapbox
 
-import android.content.Context
-import com.example.cityevents.R
 import com.example.cityevents.mapbox.location.LocationSerializable
-import com.example.cityevents.utils.setColor
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
@@ -12,7 +9,6 @@ import com.mapbox.maps.plugin.animation.easeTo
 import com.mapbox.maps.plugin.compass.compass
 
 class Compass(
-    private val context: Context,
     mapView: MapView,
     private val curLocation: LocationSerializable
 ) {
@@ -23,24 +19,12 @@ class Compass(
         compass.fadeWhenFacingNorth = false
         alignCameraToNorth()
         centerCamera()
-        val icNav = context.getDrawable(R.drawable.ic_navigation)
 
         compass.addCompassClickListener {
             if (map.cameraState.bearing != 0.0) {
                 alignCameraToNorth()
-                icNav?.setColor(context, R.color.black_gray)
-                compass.image = icNav
             } else {
                 centerCamera()
-                icNav?.setColor(context, R.color.blue_500)
-            }
-        }
-        map.addOnCameraChangeListener {
-            if (map.cameraState.bearing != 0.0) {
-                icNav?.setColor(context, R.color.black_gray)
-                compass.image = null
-            } else {
-                compass.image = icNav
             }
         }
     }

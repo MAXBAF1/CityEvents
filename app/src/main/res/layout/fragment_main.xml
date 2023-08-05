@@ -15,4 +15,40 @@
 
     </com.mapbox.maps.MapView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addEventBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:srcCompat="@drawable/ic_plus" />
+
+    <ImageView
+        android:id="@+id/crossImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toTopOf="parent"
+        mapbox:srcCompat="@drawable/ic_cross" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/closeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toTopOf="parent"
+        mapbox:srcCompat="@drawable/ic_cross" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

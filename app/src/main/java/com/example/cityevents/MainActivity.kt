@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.example.cityevents.databinding.ActivityMainBinding
 import com.example.cityevents.fragments.AccountFragment
 import com.example.cityevents.fragments.EventFragment
-import com.example.cityevents.fragments.MainFragment
+import com.example.cityevents.fragments.mainFragment.MainFragment
 import com.example.cityevents.utils.openFragment
 
 class MainActivity : AppCompatActivity() {
