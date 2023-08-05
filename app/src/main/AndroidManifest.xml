@@ -35,15 +35,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <service
-            android:name=".mapbox.location.LocationService"
-            android:foregroundServiceType="location"
-            android:enabled="true" />
-        <receiver
-            android:name=".mapbox.location.serviceNotification.StopServiceReceiver"
-            android:enabled="true"
-            android:exported="true">
-        </receiver>
     </application>
 
 </manifest>

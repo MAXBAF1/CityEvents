@@ -1,5 +1,6 @@
 package com.example.cityevents.mapbox
 
+import android.location.Location
 import com.example.cityevents.mapbox.location.LocationSerializable
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
@@ -10,7 +11,7 @@ import com.mapbox.maps.plugin.compass.compass
 
 class Compass(
     mapView: MapView,
-    private val curLocation: LocationSerializable
+    private val curLocation: Location
 ) {
     private val compass = mapView.compass
     private val map = mapView.getMapboxMap()

@@ -1,5 +1,6 @@
 package com.example.cityevents.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,12 +10,19 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import com.example.cityevents.R
+import com.mapbox.common.location.compat.LocationEngine
+import com.mapbox.common.location.compat.LocationEngineCallback
+import com.mapbox.common.location.compat.LocationEngineResult
+import com.mapbox.common.location.compat.permissions.PermissionsManager
+import com.mapbox.geojson.Point
 import java.io.Serializable
 
 fun Fragment.openFragment(f: Fragment) {
@@ -36,6 +44,31 @@ fun Fragment.showToast(string: String) {
     Toast.makeText(activity, string, Toast.LENGTH_SHORT).show()
 }
 
+fun Fragment.showToast(resId: Int) {
+    Toast.makeText(activity, getString(resId), Toast.LENGTH_SHORT).show()
+}
+
+
+@SuppressLint("MissingPermission")
+fun LocationEngine.lastKnownLocation(context: Context, callback: (Point?) -> Unit) {
+    if (!PermissionsManager.areLocationPermissionsGranted(context)) {
+        callback(null)
+    }
+
+    getLastLocation(object : LocationEngineCallback<LocationEngineResult> {
+        override fun onSuccess(result: LocationEngineResult) {
+            val location = (result.locations?.lastOrNull() ?: result.lastLocation)?.let { location ->
+                Point.fromLngLat(location.longitude, location.latitude)
+            }
+            callback(location)
+        }
+
+        override fun onFailure(exception: Exception) {
+            callback(null)
+        }
+    })
+}
+
 fun Fragment.checkPermission(p: String): Boolean {
     return when (PackageManager.PERMISSION_GRANTED) {
         ContextCompat.checkSelfPermission(activity as AppCompatActivity, p) -> true
@@ -49,6 +82,13 @@ fun Drawable.setColor(context: Context, colorResId: Int) {
     DrawableCompat.setTint(wrappedDrawable, color)
     DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
 }
+
+fun View.hideKeyboard() {
+    context.inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+}
+
+val Context.inputMethodManager: InputMethodManager
+    get() = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
 fun Drawable.toBitmap(): Bitmap? {
     if (this is BitmapDrawable) {

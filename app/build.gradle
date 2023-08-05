@@ -37,6 +37,14 @@ android {
 }
 
 dependencies {
+    // Mapbox search
+    implementation "com.mapbox.search:autofill:1.0.0-rc.6"
+    implementation "com.mapbox.search:discover:1.0.0-rc.6"
+    implementation "com.mapbox.search:place-autocomplete:1.0.0-rc.6"
+    implementation "com.mapbox.search:offline:1.0.0-rc.6"
+    implementation "com.mapbox.search:mapbox-search-android:1.0.0-rc.6"
+    implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-rc.6"
+
     implementation "androidx.fragment:fragment-ktx:1.4.0"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"

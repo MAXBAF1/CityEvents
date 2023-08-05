@@ -25,10 +25,8 @@ class Events(
     private val marker = Marker(context, mapView)
 
     override fun onMapClick(point: com.mapbox.geojson.Point): Boolean {
-        val screenSize = Point(mapView.width, mapView.height)
-        val screenCenter = ScreenCoordinate(screenSize.x / 2.0, screenSize.y / 2.0)
-        val centerLatLng = mapView.getMapboxMap().coordinateForPixel(screenCenter)
-        showEventDialog(centerLatLng)
+        val mapCenter = mapView.getMapboxMap().cameraState.center
+        showEventDialog(mapCenter)
         return true
     }
 
