@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import com.example.cityevents.R
+import com.example.cityevents.fragments.mainFragment.MapFragment
 import com.mapbox.common.location.compat.LocationEngine
 import com.mapbox.common.location.compat.LocationEngineCallback
 import com.mapbox.common.location.compat.LocationEngineResult
@@ -28,16 +29,23 @@ import java.io.Serializable
 fun Fragment.openFragment(f: Fragment) {
     (activity as AppCompatActivity).supportFragmentManager.beginTransaction()
         .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-        .replace(R.id.placeHolder, f).commit()
+        .replace(R.id.nav_host_fragment, f).commit()
 }
 
-fun AppCompatActivity.openFragment(f: Fragment) {
-    if (supportFragmentManager.fragments.isNotEmpty() && supportFragmentManager.fragments[0].javaClass == f.javaClass) return
-
-    supportFragmentManager.beginTransaction()
+fun AppCompatActivity.openFragment(nextFragment: Fragment) {
+    val fragmentTransaction = supportFragmentManager.beginTransaction()
         .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-        .replace(R.id.placeHolder, f)
-        .addToBackStack(null).commit()
+
+    val currentFragment = supportFragmentManager.fragments.firstOrNull()
+
+    if (currentFragment == null || currentFragment::class != nextFragment::class) {
+        if (nextFragment is MapFragment) {
+            supportFragmentManager.popBackStack()
+        } else {
+            fragmentTransaction.addToBackStack(null)
+        }
+        fragmentTransaction.replace(R.id.nav_host_fragment, nextFragment).commit()
+    }
 }
 
 fun Fragment.showToast(string: String) {

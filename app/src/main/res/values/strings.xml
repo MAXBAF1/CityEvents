@@ -2,9 +2,9 @@
     <string name="app_name">CityEvents</string>
     <string name="mapbox_access_token">pk.eyJ1IjoiYmFmaSIsImEiOiJjbGl5aWdvODkwMTAzM3NsNHAxZTA5a2QwIn0.yrhMLMo5VVC8cxtMtY3usg</string>
 
-    <string name="mode">Mode</string>
+    <string name="map">Map</string>
     <string name="account">Account</string>
-    <string name="Events">Events</string>
+    <string name="events">Events</string>
 
 
     <string name="location_permission">Exact location is needed. App will be closed</string>

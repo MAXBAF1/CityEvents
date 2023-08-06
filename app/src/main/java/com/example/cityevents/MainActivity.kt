@@ -1,12 +1,10 @@
 package com.example.cityevents
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.cityevents.databinding.ActivityMainBinding
-import com.example.cityevents.fragments.AccountFragment
-import com.example.cityevents.fragments.EventFragment
-import com.example.cityevents.fragments.mainFragment.MainFragment
-import com.example.cityevents.utils.openFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,18 +14,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        onBottomNavClick()
-        openFragment(MainFragment.newInstance())
-    }
-
-    private fun onBottomNavClick() {
-        binding.bNav.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.mode -> openFragment(MainFragment.newInstance())
-                R.id.events -> openFragment(EventFragment.newInstance())
-                R.id.account -> openFragment(AccountFragment.newInstance())
-            }
-            true
-        }
+        val navController = findNavController(R.id.nav_host_fragment)
+        binding.bNav.setupWithNavController(navController)
     }
 }

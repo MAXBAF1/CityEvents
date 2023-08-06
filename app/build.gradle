@@ -37,6 +37,10 @@ android {
 }
 
 dependencies {
+    // Navigation between fragments
+    implementation "androidx.navigation:navigation-fragment-ktx:2.6.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.6.0"
+
     // Mapbox search
     implementation "com.mapbox.search:autofill:1.0.0-rc.6"
     implementation "com.mapbox.search:discover:1.0.0-rc.6"
@@ -52,7 +56,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
     // Room
-    implementation 'androidx.room:room-runtime:2.5.2' // Библиотека "Room"
+    implementation 'androidx.room:room-runtime:2.5.2'
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.6.0'// Библиотека "Room"
     kapt "androidx.room:room-compiler:2.5.2" // Кодогенератор
     implementation 'androidx.room:room-ktx:2.5.2' // Дополнительно для Kotlin Coroutines, Kotlin Flows
 

@@ -10,13 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.cityevents.R
-import com.example.cityevents.databinding.FragmentMainBinding
+import com.example.cityevents.databinding.FragmentMapBinding
 import com.example.cityevents.mapbox.MapManager
 import com.example.cityevents.utils.hideKeyboard
 import com.example.cityevents.utils.showToast
@@ -31,8 +29,8 @@ import com.mapbox.search.ui.view.CommonSearchViewConfiguration
 import com.mapbox.search.ui.view.DistanceUnitType
 import com.mapbox.search.ui.view.SearchResultsView
 
-class MainFragment : Fragment() {
-    private lateinit var binding: FragmentMainBinding
+class MapFragment : Fragment() {
+    private lateinit var binding: FragmentMapBinding
     private lateinit var mapManager: MapManager
     private lateinit var mapView: MapView
     private lateinit var events: Events
@@ -44,7 +42,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentMapBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -186,6 +184,6 @@ class MainFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = MainFragment()
+        fun newInstance() = MapFragment()
     }
 }
