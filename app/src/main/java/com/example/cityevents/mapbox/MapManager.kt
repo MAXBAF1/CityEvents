@@ -14,7 +14,6 @@ import com.mapbox.maps.plugin.locationcomponent.location
 
 class MapManager(private val mainFragment: MainFragment, private val mapView: MapView) {
     private val map = mapView.getMapboxMap()
-    private var isServiceRunning = false
 
     private val model: MainViewModel by mainFragment.activityViewModels {
         MainViewModel.ViewModelFactory((mainFragment.requireContext().applicationContext as MainApp).database)
@@ -31,23 +30,11 @@ class MapManager(private val mainFragment: MainFragment, private val mapView: Ma
         map.loadStyle(style(mainFragment.getString(R.string.globe3dKey)) { })
     }
 
-    private var isFirstStart = true
-
-    private fun updateMap(location: Location) {
-        if (isFirstStart) {
-            Compass(mapView, location).add()
-            isFirstStart = false
-        }
-    }
-
     private fun startLocUpdate() {
-        if (isServiceRunning) return
-        isServiceRunning = true
-
         mapView.location.apply {
             enabled = true
             pulsingEnabled = true
         }
-        LocationManager(mainFragment.requireContext(), ::updateMap).start()
+        LocationManager(mapView, mainFragment.requireContext()).start()
     }
 }
