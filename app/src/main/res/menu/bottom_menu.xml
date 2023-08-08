@@ -7,7 +7,7 @@
         android:title="@string/events" />
     <item
         android:id="@id/mapFragment"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_marker"
         android:orderInCategory="2"
         android:title="@string/map" />
     <item

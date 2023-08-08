@@ -11,20 +11,36 @@
         tools:layout="@layout/fragment_map">
         <action
             android:id="@+id/action_mapFragment_to_accountFragment"
-            app:destination="@id/accountFragment" />
+            app:destination="@id/accountFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/eventFragment"
-        android:name="com.example.cityevents.fragments.EventsFragment"
+        android:name="com.example.cityevents.fragments.eventsFragment.EventsFragment"
         android:label="fragment_event"
         tools:layout="@layout/fragment_events" >
         <action
             android:id="@+id/action_eventFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
+            app:destination="@id/mapFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.cityevents.fragments.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_eventFragment"
+            app:destination="@id/eventFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
 </navigation>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "448015279594",
+    "firebase_url": "https://cityevents-73513-default-rtdb.firebaseio.com",
+    "project_id": "cityevents-73513",
+    "storage_bucket": "cityevents-73513.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448015279594:android:a33304ba1c5ac441d67e93",
+        "android_client_info": {
+          "package_name": "com.example.cityevents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448015279594-es69rk9ob23u00ff6qqptktnrg56qlch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn3iCMIHSXIfFxihFqaNNscTiNJIFRLRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448015279594-es69rk9ob23u00ff6qqptktnrg56qlch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

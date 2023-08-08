@@ -7,7 +7,7 @@
     <string name="events">Events</string>
 
 
-    <string name="location_permission">Exact location is needed. App will be closed</string>
+    <string name="location_permission">Location permission is needed</string>
 
     <!--Location Service Notification-->
     <string name="around_running">CityEvents Running!</string>
@@ -20,4 +20,16 @@
     <string name="address_autofill_error_select">Unable to resolve selected suggestion</string>
     <string name="address_autofill_error_pin_correction">Unable to locate selected coordinate</string>
 
+    <!--Sign in screen-->
+    <string name="sign_in">Sign in</string>
+
+    <!--Welcome screen-->
+    <string name="welcome">Welcome to CityEvents</string>
+    <string name="welcome_desc">This application is a platform for participants and event organizers</string>
+    <string name="search_event">Looking for an event</string>
+    <string name="organizer">I\'m the organizer</string>
+
+    <!--Events screen-->
+    <string name="date_and_place">Date and place of the event</string>
+    <string name="description">Description</string>
 </resources>

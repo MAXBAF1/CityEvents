@@ -53,6 +53,11 @@ class LocationManager(private val mapView: MapView, private val context: Context
     }
 
     private fun setup() {
+        mapView.location.apply {
+            enabled = true
+            pulsingEnabled = true
+        }
+
         mapView.gestures.addOnMoveListener(onMoveListener)
         locationPlugin.addOnIndicatorPositionChangedListener(positionChangedListener)
         mapboxMap.setCamera(CameraOptions.Builder().bearing(0.0).build())

@@ -10,4 +10,10 @@
 
     <color name="blue_500">#2196F3</color>
     <color name="black_gray">#252525</color>
+
+    <color name="unchecked_color">#6e6e6e</color>
+
+    <color name="first_color">#FF8448</color>
+    <color name="second_color">#2A2D40</color>
+    <color name="text_color">#8890A8</color>
 </resources>
