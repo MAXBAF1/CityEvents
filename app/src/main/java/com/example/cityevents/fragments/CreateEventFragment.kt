@@ -81,6 +81,7 @@ class CreateEventFragment : Fragment() {
 
                 Collections.swap(selectedImages, fromPosition, toPosition)
                 imageAdapter.notifyItemMoved(fromPosition, toPosition)
+                imageAdapter.updateItemNumbers()
 
                 return true
             }
@@ -89,6 +90,7 @@ class CreateEventFragment : Fragment() {
                 val position = viewHolder.absoluteAdapterPosition
                 selectedImages.removeAt(position)
                 imageAdapter.notifyItemRemoved(position)
+                imageAdapter.updateItemNumbers()
             }
         }
     }
