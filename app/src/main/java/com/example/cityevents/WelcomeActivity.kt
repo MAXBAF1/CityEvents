@@ -21,9 +21,9 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences(APP_NAME, Context.MODE_PRIVATE)
-        val isTypeSelected = sharedPreferences.getBoolean(IS_TYPE_SELECTED_TAG, false)
+        val typeSelected = sharedPreferences.getInt(IS_TYPE_SELECTED_TAG, -1)
 
-        if (isTypeSelected) {
+        if (typeSelected != -1) {
             startMainActivity()
         }
 
@@ -43,7 +43,7 @@ class WelcomeActivity : AppCompatActivity() {
         firebase.sendAccountTypeToFirebase(accountType)
         startMainActivity()
         sharedPreferences.edit {
-            putBoolean(IS_TYPE_SELECTED_TAG, true)
+            putInt(IS_TYPE_SELECTED_TAG, accountType.ordinal)
         }
     }
 

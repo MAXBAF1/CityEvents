@@ -12,11 +12,14 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.cityevents.R
 import com.example.cityevents.fragments.mainFragment.MapFragment
 import com.mapbox.common.location.compat.LocationEngine
@@ -25,6 +28,21 @@ import com.mapbox.common.location.compat.LocationEngineResult
 import com.mapbox.common.location.compat.permissions.PermissionsManager
 import com.mapbox.geojson.Point
 import java.io.Serializable
+
+fun ImageView.loadImage(url: String?) {
+    if (url.isNullOrEmpty()) {
+        Glide.with(context)
+            .load(R.mipmap.ic_launcher)
+            .transform(RoundedCorners(10))
+            .into(this)
+    } else {
+        Glide.with(context)
+            .load(url)
+            .transform(RoundedCorners(10))
+            .into(this)
+    }
+}
+
 
 fun Fragment.openFragment(f: Fragment) {
     (activity as AppCompatActivity).supportFragmentManager.beginTransaction()

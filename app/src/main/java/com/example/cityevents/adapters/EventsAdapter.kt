@@ -1,4 +1,4 @@
-package com.example.cityevents.fragments.eventsFragment
+package com.example.cityevents.adapters
 
 import android.app.AlertDialog
 import android.content.Context
@@ -6,26 +6,22 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.cityevents.R
 import com.example.cityevents.data.Event
-import kotlin.math.roundToInt
 
-class LastFoodsAdapter(
+class EventsAdapter(
     private val context: Context,
     private val events: List<Event>
-) : RecyclerView.Adapter<LastFoodsAdapter.FoodViewHolder>() {
+) : RecyclerView.Adapter<EventsAdapter.FoodViewHolder>() {
 
     inner class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imageView: ImageView = itemView.findViewById(R.id.eventImageView)
+        private val imageView: ImageView = itemView.findViewById(R.id.photoImageView)
         private val nameTextView: TextView = itemView.findViewById(R.id.eventNameTextView)
         private val categoryTv: TextView = itemView.findViewById(R.id.eventCategoryTv)
 

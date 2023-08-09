@@ -36,12 +36,34 @@ class Firebase {
                 }
             }
 
-            override fun onCancelled(databaseError: DatabaseError) {}
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.e("MyLog", databaseError.toString())
+            }
         })
         Log.e("item", auth.currentUser?.displayName.toString())
     }
 
     fun sendAccountTypeToFirebase(accountType: AccountType) {
         userRef.child("accountType").setValue(accountType.name)
+    }
+
+    fun getAccountTypeFromFirebase(callback: (AccountType) -> Unit) {
+        userRef.child("accountType").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                val value = dataSnapshot.value as String
+                callback(AccountType.valueOf(value))
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.e("MyLog", error.toString())
+            }
+        })
+    }
+
+    fun signOut() {
+        auth.signOut()
     }
 }

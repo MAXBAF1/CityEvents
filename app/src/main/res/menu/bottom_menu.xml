@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item
+        android:id="@id/eventFragment"
+        android:icon="@drawable/ic_plus"
+        android:orderInCategory="1"
+        android:title="@string/create_events" />
     <item
         android:id="@id/eventFragment"
-        android:icon="@drawable/ic_tracks"
-        android:orderInCategory="1"
-        android:title="@string/events" />
+        android:icon="@drawable/ic_staistic"
+        android:orderInCategory="2"
+        android:title="@string/statistic" />
     <item
         android:id="@id/mapFragment"
         android:icon="@drawable/ic_marker"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:title="@string/map" />
+    <item
+        android:id="@id/eventFragment"
+        android:icon="@drawable/ic_tracks"
+        android:orderInCategory="4"
+        android:title="@string/events" />
     <item
         android:id="@id/accountFragment"
         android:icon="@drawable/ic_settings"
-        android:orderInCategory="3"
-        android:title="@string/account" />
+        android:orderInCategory="5"
+        android:title="@string/account" />-->
 </menu>
