@@ -47,7 +47,7 @@ fun ImageView.loadImage(url: String?) {
 fun Fragment.openFragment(f: Fragment) {
     (activity as AppCompatActivity).supportFragmentManager.beginTransaction()
         .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-        .replace(R.id.nav_host_fragment, f).commit()
+        .replace(R.id.placeHolder, f).addToBackStack(null).commit()
 }
 
 fun AppCompatActivity.openFragment(nextFragment: Fragment) {
@@ -62,7 +62,7 @@ fun AppCompatActivity.openFragment(nextFragment: Fragment) {
         } else {
             fragmentTransaction.addToBackStack(null)
         }
-        fragmentTransaction.replace(R.id.nav_host_fragment, nextFragment).commit()
+        fragmentTransaction.replace(R.id.placeHolder, nextFragment).commit()
     }
 }
 

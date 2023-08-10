@@ -1,4 +1,4 @@
-package com.example.cityevents.fragments
+package com.example.cityevents.fragments.addEventFragments
 
 import android.app.Activity
 import android.content.ClipData
@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cityevents.adapters.ImageAdapter
-import com.example.cityevents.databinding.FragmentCreateEventBinding
+import com.example.cityevents.databinding.FragmentAddImagesBinding
+import com.example.cityevents.utils.openFragment
 import java.util.*
 
-class CreateEventFragment : Fragment() {
-    private lateinit var binding: FragmentCreateEventBinding
+class AddImagesFragment : Fragment() {
+    private lateinit var binding: FragmentAddImagesBinding
     private val selectedImages = mutableListOf<Uri>()
     private val imageAdapter: ImageAdapter by lazy { ImageAdapter(selectedImages) }
 
@@ -37,7 +38,7 @@ class CreateEventFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCreateEventBinding.inflate(inflater, container, false)
+        binding = FragmentAddImagesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -54,6 +55,10 @@ class CreateEventFragment : Fragment() {
 
         binding.addPhotosBtn.setOnClickListener {
             galleryLauncher.launch(pickImageIntent)
+        }
+
+        binding.nextStepBtn.setOnClickListener {
+            openFragment(ChoosePlaceFragment.newInstance())
         }
     }
 
@@ -121,6 +126,6 @@ class CreateEventFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = CreateEventFragment()
+        fun newInstance() = AddImagesFragment()
     }
 }

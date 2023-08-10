@@ -8,7 +8,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.cityevents.databinding.ActivityMainBinding
 import com.example.cityevents.fragments.AccountFragment
+import com.example.cityevents.fragments.EventStatisticsFragment
 import com.example.cityevents.fragments.EventsFragment
+import com.example.cityevents.fragments.addEventFragments.AddImagesFragment
 import com.example.cityevents.fragments.mainFragment.MapFragment
 import com.example.cityevents.utils.AccountType
 import com.example.cityevents.utils.openFragment
@@ -21,10 +23,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        binding.bNav.setupWithNavController(navController)
-        /*onBottomNavClick()
-        openFragment(MapFragment.newInstance())*/
+        /*val navController = findNavController(R.id.nav_host_fragment)
+        binding.bNav.setupWithNavController(navController)*/
+        onBottomNavClick()
+        openFragment(MapFragment.newInstance())
         val sharedPref = getSharedPreferences(SignInActivity.APP_NAME, Context.MODE_PRIVATE)
         val accountType = sharedPref.getInt(WelcomeActivity.IS_TYPE_SELECTED_TAG, -1)
 
@@ -54,7 +56,8 @@ class MainActivity : AppCompatActivity() {
     private fun onBottomNavClick() {
         binding.bNav.setOnItemSelectedListener {
             when (it.itemId) {
-
+                R.id.createEventFragment -> openFragment(AddImagesFragment.newInstance())
+                R.id.eventStatisticsFragment -> openFragment(EventStatisticsFragment.newInstance())
                 R.id.eventFragment -> openFragment(EventsFragment.newInstance())
                 R.id.mapFragment -> openFragment(MapFragment.newInstance())
                 R.id.accountFragment -> openFragment(AccountFragment.newInstance())

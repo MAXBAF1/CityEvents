@@ -2,24 +2,16 @@
     <string name="app_name">CityEvents</string>
     <string name="mapbox_access_token">pk.eyJ1IjoiYmFmaSIsImEiOiJjbGl5aWdvODkwMTAzM3NsNHAxZTA5a2QwIn0.yrhMLMo5VVC8cxtMtY3usg</string>
 
+    <!--Bottom menu-->
     <string name="map">Map</string>
     <string name="account">Account</string>
     <string name="events">Events</string>
     <string name="add_event">Add event</string>
     <string name="statistic">Statistic</string>
 
-
     <string name="location_permission">Location permission is needed</string>
 
-    <!--Location Service Notification-->
-    <string name="around_running">CityEvents Running!</string>
-    <string name="stop_and_exit">Stop and exit</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="where_event_hint">Where is the event?</string>
-    <string name="address_autofill_error_select">Unable to resolve selected suggestion</string>
-    <string name="address_autofill_error_pin_correction">Unable to locate selected coordinate</string>
 
     <!--Sign in screen-->
     <string name="sign_in">Sign in</string>
@@ -37,9 +29,22 @@
     <!--Account screen-->
     <string name="exit">Exit</string>
 
-    <!--Create event screen-->
+    <!--Add images screen-->
     <string name="add_photos">Add photos that will describe the atmosphere of your event well</string>
     <string name="possible_add_photo">It is possible to add a photo after the publication of the event</string>
     <string name="add">Add</string>
     <string name="next">Next</string>
+
+    <!--Choose place screen-->
+    <string name="choose_place">Choose a place where your event will take place</string>
+    <string name="address_autofill_query_hint">Where is the event?</string>
+    <string name="address_autofill_address_state_hint">State</string>
+    <string name="address_autofill_address_zip_hint">Zip Code</string>
+    <string name="address_autofill_address_city_hint">City</string>
+    <string name="address_autofill_address_apt_hint">Apt., suite, etc. (optional)</string>
+    <string name="address_autofill_error_select">Unable to resolve selected suggestion</string>
+    <string name="address_autofill_pin_correction_note">Drag map to correct pin position</string>
+    <string name="address_autofill_error_pin_correction">Unable to locate selected coordinate</string>
+
+
 </resources>

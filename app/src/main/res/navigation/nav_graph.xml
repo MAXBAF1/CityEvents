@@ -37,9 +37,9 @@
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/createEventFragment"
-        android:name="com.example.cityevents.fragments.CreateEventFragment"
+        android:name="com.example.cityevents.fragments.addEventFragments.AddImagesFragment"
         android:label="fragment_create_event"
-        tools:layout="@layout/fragment_create_event" >
+        tools:layout="@layout/fragment_add_images" >
         <action
             android:id="@+id/action_createEventFragment_to_eventStatisticsFragment"
             app:destination="@id/eventStatisticsFragment" />
