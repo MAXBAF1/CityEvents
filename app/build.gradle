@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'com.example.cityevents'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.cityevents"
@@ -26,11 +26,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     buildFeatures{
         viewBinding true
@@ -39,18 +39,18 @@ android {
 
 dependencies {
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation platform('com.google.firebase:firebase-bom:32.2.2')
     implementation 'com.google.firebase:firebase-database-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.6.0'
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.13.0'
-    kapt 'com.github.bumptech.glide:compiler:4.13.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    kapt 'com.github.bumptech.glide:compiler:4.15.1'
 
     // Navigation between fragments
-    implementation "androidx.navigation:navigation-fragment-ktx:2.6.0"
-    implementation "androidx.navigation:navigation-ui-ktx:2.6.0"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.0'
 
     // Mapbox search
     implementation "com.mapbox.search:autofill:1.0.0-rc.6"
@@ -60,27 +60,27 @@ dependencies {
     implementation "com.mapbox.search:mapbox-search-android:1.0.0-rc.6"
     implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-rc.6"
 
-    implementation "androidx.fragment:fragment-ktx:1.4.0"
+    implementation 'androidx.fragment:fragment-ktx:1.6.1'
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
 
     // Room
     implementation 'androidx.room:room-runtime:2.5.2'
-    implementation 'androidx.navigation:navigation-runtime-ktx:2.6.0'// Библиотека "Room"
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.7.0'// Библиотека "Room"
     kapt "androidx.room:room-compiler:2.5.2" // Кодогенератор
     implementation 'androidx.room:room-ktx:2.5.2' // Дополнительно для Kotlin Coroutines, Kotlin Flows
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     // Mapbox
     implementation 'com.mapbox.maps:android:10.15.0'
     implementation("com.google.android.gms:play-services-location:21.0.1")
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
