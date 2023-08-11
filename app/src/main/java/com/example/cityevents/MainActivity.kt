@@ -11,6 +11,7 @@ import com.example.cityevents.fragments.AccountFragment
 import com.example.cityevents.fragments.EventStatisticsFragment
 import com.example.cityevents.fragments.EventsFragment
 import com.example.cityevents.fragments.addEventFragments.AddImagesFragment
+import com.example.cityevents.fragments.addEventFragments.EventInfoFragment
 import com.example.cityevents.fragments.mainFragment.MapFragment
 import com.example.cityevents.utils.AccountType
 import com.example.cityevents.utils.openFragment
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     private fun onBottomNavClick() {
         binding.bNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.createEventFragment -> openFragment(AddImagesFragment.newInstance())
+                R.id.createEventFragment -> openFragment(EventInfoFragment.newInstance())
                 R.id.eventStatisticsFragment -> openFragment(EventStatisticsFragment.newInstance())
                 R.id.eventFragment -> openFragment(EventsFragment.newInstance())
                 R.id.mapFragment -> openFragment(MapFragment.newInstance())

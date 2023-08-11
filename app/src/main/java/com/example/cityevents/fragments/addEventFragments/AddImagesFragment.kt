@@ -57,8 +57,12 @@ class AddImagesFragment : Fragment() {
             galleryLauncher.launch(pickImageIntent)
         }
 
+        binding.backBtn.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+
         binding.nextStepBtn.setOnClickListener {
-            openFragment(ChoosePlaceFragment.newInstance())
+            openFragment(LocationPickerFragment.newInstance())
         }
     }
 

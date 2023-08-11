@@ -29,22 +29,36 @@
     <!--Account screen-->
     <string name="exit">Exit</string>
 
+    <!--Event info screen-->
+    <string name="craft_event">Craft Your Event</string>
+    <string name="add_name">Add a captivating name for your event</string>
+    <string name="select_category">Select a fitting category to classify your event</string>
+    <string name="craft_description">Craft a detailed description to entice attendees</string>
+    <string-array name="event_categories">
+        <item>Select a category</item>
+        <item>Culture</item>
+        <item>Sport</item>
+        <item>Education</item>
+        <item>Entertainment</item>
+        <item>Social</item>
+        <item>Children &amp; Family</item>
+    </string-array>
+
     <!--Add images screen-->
     <string name="add_photos">Add photos that will describe the atmosphere of your event well</string>
     <string name="possible_add_photo">It is possible to add a photo after the publication of the event</string>
     <string name="add">Add</string>
     <string name="next">Next</string>
 
-    <!--Choose place screen-->
+    <!--Location picker screen-->
     <string name="choose_place">Choose a place where your event will take place</string>
     <string name="address_autofill_query_hint">Where is the event?</string>
-    <string name="address_autofill_address_state_hint">State</string>
-    <string name="address_autofill_address_zip_hint">Zip Code</string>
-    <string name="address_autofill_address_city_hint">City</string>
-    <string name="address_autofill_address_apt_hint">Apt., suite, etc. (optional)</string>
     <string name="address_autofill_error_select">Unable to resolve selected suggestion</string>
     <string name="address_autofill_pin_correction_note">Drag map to correct pin position</string>
     <string name="address_autofill_error_pin_correction">Unable to locate selected coordinate</string>
+    <string name="back">Back</string>
 
-
+    <!--Date&time picker screen-->
+    <string name="select_date_time">Select the date and time when your event will take place</string>
+    <string name="done">Done</string>
 </resources>
