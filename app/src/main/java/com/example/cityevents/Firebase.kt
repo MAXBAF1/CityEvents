@@ -1,6 +1,7 @@
 package com.example.cityevents
 
 import android.util.Log
+import com.example.cityevents.data.Event
 import com.example.cityevents.utils.AccountType
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -12,19 +13,17 @@ import java.util.*
 
 class Firebase {
     var username: String
-    var database: FirebaseDatabase
+    var eventsRef: DatabaseReference
     var userRef: DatabaseReference
-    var dateRef: DatabaseReference
 
     private var auth: FirebaseAuth = Firebase.auth
     private val sdf = SimpleDateFormat("dd:MM:yyyy", Locale.getDefault())
-    private var date = sdf.format(Calendar.getInstance().time)
 
     init {
+        val database = FirebaseDatabase.getInstance()
         username = auth.currentUser!!.displayName.toString()
-        database = FirebaseDatabase.getInstance()
+        eventsRef = database.getReference("events")
         userRef = database.getReference("users").child(username)
-        dateRef = userRef.child(date)
     }
 
     fun loadUser() {
@@ -45,6 +44,11 @@ class Firebase {
 
     fun sendAccountTypeToFirebase(accountType: AccountType) {
         userRef.child("accountType").setValue(accountType.name)
+    }
+
+    fun sendEventToFirebase(event: Event) {
+        val query = eventsRef.child(userRef.push().key ?: "blablabla")
+        query.setValue(event)
     }
 
     fun getAccountTypeFromFirebase(callback: (AccountType) -> Unit) {

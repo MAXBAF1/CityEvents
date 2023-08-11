@@ -1,13 +1,13 @@
 package com.example.cityevents.data
 
-import java.time.LocalDateTime
+import android.net.Uri
 
 data class Event(
-    val images: List<String>,
-    val category: String,
     val name: String,
-    val date: LocalDateTime,
-    val placeAddress: String,
-    val placeName: String,
-    val description: String
-)
+    val category: String,
+    val description: String,
+    var images: List<String>? = null,
+    var placeAddress: String? = null,
+    var placeName: String? = null,
+    var dateTime: DateTime? = null,
+) : java.io.Serializable

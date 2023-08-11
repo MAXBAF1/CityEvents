@@ -10,11 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.example.cityevents.Firebase
+import com.example.cityevents.data.DateTime
 import com.example.cityevents.databinding.FragmentDateTimePickerBinding
-
+import com.example.cityevents.fragments.mainFragment.MapFragment
+import com.example.cityevents.utils.openFragment
 
 class DateTimePickerFragment : Fragment() {
     private lateinit var binding: FragmentDateTimePickerBinding
+    private val eventModel: EventModel by activityViewModels()
+    private var selectedDateTime = DateTime()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -40,7 +46,10 @@ class DateTimePickerFragment : Fragment() {
         }
 
         binding.nextStepBtn.setOnClickListener {
-
+            eventModel.event.value?.dateTime = selectedDateTime
+            Firebase().sendEventToFirebase(eventModel.event.value!!)
+            openFragment(MapFragment.newInstance())
+            requireActivity().supportFragmentManager.clearBackStack("")
         }
     }
 
@@ -53,6 +62,9 @@ class DateTimePickerFragment : Fragment() {
 
         val datePickerDialog = DatePickerDialog(
             requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+                selectedDateTime.year = selectedYear
+                selectedDateTime.month = selectedMonth
+                selectedDateTime.day = selectedDay
                 val date =
                     "You picked the following date: " + selectedDay.toString() + "/" + (selectedMonth + 1).toString() + "/" + selectedYear
 
@@ -73,6 +85,8 @@ class DateTimePickerFragment : Fragment() {
             { _, selectedHour, selectedMinute ->
                 val time =
                     "You picked the following time: " + selectedHour.toString() + "h" + selectedMinute.toString() + "m"
+                selectedDateTime.hour = selectedHour
+                selectedDateTime.minute = selectedMinute
                 binding.timeTextView.text = time
             },
             hour,

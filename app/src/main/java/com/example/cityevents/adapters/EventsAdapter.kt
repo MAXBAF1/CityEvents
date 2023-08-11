@@ -2,6 +2,7 @@ package com.example.cityevents.adapters
 
 import android.app.AlertDialog
 import android.content.Context
+import android.net.Uri
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,7 @@ class EventsAdapter(
         private val categoryTv: TextView = itemView.findViewById(R.id.eventCategoryTv)
 
         fun bind(event: Event) {
-            loadImage(event.images.first(), imageView)
+            loadImage(event.images?.first(), imageView)
             nameTextView.text = event.name
             categoryTv.text = event.category
         }
@@ -79,8 +80,8 @@ class EventsAdapter(
 
         view.findViewById<TextView>(R.id.eventCategoryTv).text = event.category
         view.findViewById<TextView>(R.id.eventNameTv).text = event.name
-        view.findViewById<TextView>(R.id.eventTimeTv).text = event.date.hour.toString()
-        view.findViewById<TextView>(R.id.eventDateTv).text = event.date.toString()
+        view.findViewById<TextView>(R.id.eventTimeTv).text = event.dateTime?.hour.toString()
+        view.findViewById<TextView>(R.id.eventDateTv).text = event.dateTime.toString()
         view.findViewById<TextView>(R.id.eventPlaceTv).text = event.placeAddress
         view.findViewById<TextView>(R.id.eventPlaceNameTv).text = event.placeName
         view.findViewById<TextView>(R.id.eventDescriptionTv).text = event.description

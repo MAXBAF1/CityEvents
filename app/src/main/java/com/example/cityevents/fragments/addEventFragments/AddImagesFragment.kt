@@ -10,16 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cityevents.adapters.ImageAdapter
+import com.example.cityevents.data.Event
 import com.example.cityevents.databinding.FragmentAddImagesBinding
 import com.example.cityevents.utils.openFragment
 import java.util.*
 
 class AddImagesFragment : Fragment() {
     private lateinit var binding: FragmentAddImagesBinding
+    private val eventModel: EventModel by activityViewModels()
     private val selectedImages = mutableListOf<Uri>()
     private val imageAdapter: ImageAdapter by lazy { ImageAdapter(selectedImages) }
 
@@ -62,6 +65,7 @@ class AddImagesFragment : Fragment() {
         }
 
         binding.nextStepBtn.setOnClickListener {
+            eventModel.event.value!!.images = selectedImages.map { it.toString() }
             openFragment(LocationPickerFragment.newInstance())
         }
     }

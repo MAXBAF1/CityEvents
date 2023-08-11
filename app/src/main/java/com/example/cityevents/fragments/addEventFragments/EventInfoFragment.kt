@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.cityevents.R
+import com.example.cityevents.data.Event
 import com.example.cityevents.databinding.FragmentEventInfoBinding
 import com.example.cityevents.utils.openFragment
 
 class EventInfoFragment : Fragment() {
     private lateinit var binding: FragmentEventInfoBinding
+    private val eventModel: EventModel by activityViewModels()
+
+    private lateinit var selectedCategory: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -27,6 +32,7 @@ class EventInfoFragment : Fragment() {
         setupCategorySpinner()
 
         binding.nextStepBtn.setOnClickListener {
+            eventModel.event.value = Event(binding.edEventName.text.toString(), selectedCategory, binding.edDescription.text.toString())
             openFragment(AddImagesFragment.newInstance())
         }
     }
@@ -39,7 +45,7 @@ class EventInfoFragment : Fragment() {
 
         binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedCategory = categories[position]
+                selectedCategory = categories[position]
                 // Здесь можно выполнить действия при выборе элемента
             }
 

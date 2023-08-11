@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.cityevents.R
 import com.example.cityevents.databinding.FragmentLocationPickerBinding
 import com.example.cityevents.mapbox.AddressAutofillManager
@@ -13,9 +14,10 @@ import com.mapbox.maps.MapboxMap
 import com.mapbox.maps.plugin.scalebar.scalebar
 
 class LocationPickerFragment : Fragment() {
+    private lateinit var binding: FragmentLocationPickerBinding
+    private val eventModel: EventModel by activityViewModels()
     private lateinit var mapboxMap: MapboxMap
 
-    private lateinit var binding: FragmentLocationPickerBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -39,6 +41,7 @@ class LocationPickerFragment : Fragment() {
         }
 
         binding.nextStepBtn.setOnClickListener {
+            eventModel.event.value!!.placeAddress = binding.queryText.text.toString()
             openFragment(DateTimePickerFragment.newInstance())
         }
     }
