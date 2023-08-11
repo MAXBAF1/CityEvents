@@ -12,8 +12,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Firebase {
-    var username: String
-    var eventsRef: DatabaseReference
+    private var username: String
+    private var eventsRef: DatabaseReference
     var userRef: DatabaseReference
 
     private var auth: FirebaseAuth = Firebase.auth
@@ -65,6 +65,15 @@ class Firebase {
                 Log.e("MyLog", error.toString())
             }
         })
+    }
+
+    fun getEventsFromFirebase(callback: (List<Event>) -> Unit) {
+        eventsRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                callback(snapshot.children.map { data -> data.getValue(Event::class.java)!! })
+            }
+        }
     }
 
     fun signOut() {

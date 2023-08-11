@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.room.PrimaryKey
 import com.example.cityevents.R
+import com.example.cityevents.data.LocationSerializable
 import com.example.cityevents.utils.toBitmap
 import com.mapbox.geojson.Point
 import com.mapbox.maps.MapView
@@ -25,4 +26,9 @@ class Marker(private val context: Context, private val mapView: MapView) {
         }
     }
 
+    fun addMarkersToMap(locations: Iterable<LocationSerializable>) {
+        locations.forEach {
+            addMarkerToMap(Point.fromLngLat(it.longitude, it.latitude))
+        }
+    }
 }

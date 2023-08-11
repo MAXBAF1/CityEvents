@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.example.cityevents.Firebase
 import com.example.cityevents.R
 import com.example.cityevents.databinding.FragmentMapBinding
 import com.example.cityevents.mapbox.MapManager
+import com.example.cityevents.mapbox.Marker
 import com.mapbox.maps.MapView
 import com.mapbox.maps.plugin.gestures.addOnMapClickListener
 import com.mapbox.maps.plugin.gestures.removeOnMapClickListener
@@ -20,7 +22,8 @@ class MapFragment : Fragment() {
     private lateinit var binding: FragmentMapBinding
     private lateinit var mapManager: MapManager
     private lateinit var mapView: MapView
-    private lateinit var events: Events
+    private lateinit var firebase: Firebase
+    private lateinit var marker: Marker
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -31,43 +34,17 @@ class MapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mapView = binding.mapView
-
+        marker = Marker(requireContext(), mapView)
+        firebase = Firebase()
+        getEventsFromFirebase()
         mapManager = MapManager(this, mapView)
         mapManager.initMap()
-        eventsInit()
     }
 
-    private fun eventsInit() {
-        val dialogView = layoutInflater.inflate(R.layout.event_dialog, null)
-        val resultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    val data: Intent? = result.data
-                    val selectedImageUri = data?.data
-                    if (selectedImageUri != null) {
-                        val imageBtn = dialogView.findViewById<ImageButton>(R.id.eventImageBtn)
-                        imageBtn.setImageURI(selectedImageUri)
-                    }
-                }
-            }
-        events = Events(requireContext(), mapView, dialogView, resultLauncher, ::closeEventDialog)
-        binding.addEventBtn.setOnClickListener {
-            it.visibility = View.GONE
-            binding.crossImg.visibility = View.VISIBLE
-            binding.closeBtn.visibility = View.VISIBLE
-            mapView.getMapboxMap().addOnMapClickListener(events)
+    private fun getEventsFromFirebase() {
+        firebase.getEventsFromFirebase { events ->
+            marker.addMarkersToMap(events.map { it.location!! })
         }
-
-        binding.closeBtn.setOnClickListener {
-            closeEventDialog()
-        }
-    }
-
-    private fun closeEventDialog() {
-        binding.addEventBtn.visibility = View.VISIBLE
-        binding.crossImg.visibility = View.GONE
-        binding.closeBtn.visibility = View.GONE
-        mapView.getMapboxMap().removeOnMapClickListener(events)
     }
 
     companion object {
