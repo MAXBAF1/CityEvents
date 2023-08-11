@@ -32,9 +32,10 @@ class LocationPickerFragment : Fragment() {
         mapboxMap.loadStyleUri(getString(R.string.globe3dKey))
         binding.map.scalebar.enabled = false
 
-        AddressAutofillManager(
+        val addressAutofillManager = AddressAutofillManager(
             this, binding.searchResultsView, binding.queryText, mapboxMap
-        ).create()
+        )
+        addressAutofillManager.create()
 
         binding.backBtn.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
@@ -42,6 +43,7 @@ class LocationPickerFragment : Fragment() {
 
         binding.nextStepBtn.setOnClickListener {
             eventModel.event.value!!.placeAddress = binding.queryText.text.toString()
+            eventModel.event.value!!.location = addressAutofillManager.queryLocation
             openFragment(DateTimePickerFragment.newInstance())
         }
     }

@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.cityevents.R
+import com.example.cityevents.data.LocationSerializable
 import com.example.cityevents.utils.lastKnownLocation
 import com.example.cityevents.utils.showToast
 import com.mapbox.common.location.compat.LocationEngineProvider
@@ -35,6 +36,8 @@ class AddressAutofillManager(
     private var ignoreNextQueryTextUpdate: Boolean = false
 
     private val requireContext = fragment.requireContext()
+
+    lateinit var queryLocation: LocationSerializable
 
     fun create() {
         initAddressAutofill()
@@ -167,6 +170,10 @@ class AddressAutofillManager(
         result: AddressAutofillResult, fromReverseGeocoding: Boolean
     ) {
         val address = result.address
+        queryLocation = LocationSerializable(
+            result.suggestion.coordinate.latitude(),
+            result.suggestion.coordinate.longitude()
+        )
 
         if (!fromReverseGeocoding) {
             mapboxMap.setCamera(

@@ -22,7 +22,6 @@ class MapFragment : Fragment() {
     private lateinit var mapView: MapView
     private lateinit var events: Events
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
