@@ -4,13 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.cityevents.databinding.ActivityMainBinding
 import com.example.cityevents.fragments.AccountFragment
 import com.example.cityevents.fragments.EventStatisticsFragment
-import com.example.cityevents.fragments.EventsFragment
-import com.example.cityevents.fragments.addEventFragments.AddImagesFragment
+import com.example.cityevents.fragments.eventsFragment.EventsFragment
 import com.example.cityevents.fragments.addEventFragments.EventInfoFragment
 import com.example.cityevents.fragments.mainFragment.MapFragment
 import com.example.cityevents.utils.AccountType

@@ -2,7 +2,6 @@ package com.example.cityevents.adapters
 
 import android.app.AlertDialog
 import android.content.Context
-import android.net.Uri
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -10,30 +9,29 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.cityevents.R
 import com.example.cityevents.data.Event
 
-class EventsAdapter(
-    private val context: Context,
-    private val events: List<Event>
-) : RecyclerView.Adapter<EventsAdapter.FoodViewHolder>() {
+class EventsAdapter(private val events: List<Event?>, context: Context) : RecyclerView.Adapter<EventsAdapter.EventViewHolder>() {
 
-    inner class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val context = context
+    inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.photoImageView)
         private val nameTextView: TextView = itemView.findViewById(R.id.eventNameTextView)
         private val categoryTv: TextView = itemView.findViewById(R.id.eventCategoryTv)
 
-        fun bind(event: Event) {
-            //loadImage(event.images?.first(), imageView)
+        fun bind(event: Event, context: Context) {
+            loadImage(event.images?.values!!.first(), imageView, context)
             nameTextView.text = event.name
             categoryTv.text = event.category
         }
     }
 
-    private fun loadImage(url: Uri?, imageView: ImageView) {
+    private fun loadImage(url: String, imageView: ImageView, context: Context) {
         if (url == null) {
             Glide.with(context)
                 .load(R.mipmap.ic_launcher)
@@ -47,18 +45,19 @@ class EventsAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.event_item, parent, false)
-        return FoodViewHolder(view)
+        return EventViewHolder(view)
     }
 
     override fun getItemCount(): Int = events.size
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
-        val event = events[position]
-        holder.bind(event)
+    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+        val event = events[position]!!
+        holder.bind(event, context)
+
         holder.itemView.setOnClickListener {
             val alertDialog = AlertDialog.Builder(context).create()
             val layoutInflater = LayoutInflater.from(context)

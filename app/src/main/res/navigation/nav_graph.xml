@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventFragment"
-        android:name="com.example.cityevents.fragments.EventsFragment"
+        android:name="com.example.cityevents.fragments.eventsFragment.EventsFragment"
         android:label="fragment_event"
         tools:layout="@layout/fragment_events" >
         <action
