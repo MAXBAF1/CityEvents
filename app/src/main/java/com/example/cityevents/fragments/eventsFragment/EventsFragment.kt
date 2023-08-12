@@ -31,7 +31,6 @@ class EventsFragment : Fragment() {
         val firebase = Firebase()
         firebase.getEventsFromFirebase { events ->
             setEvents(events)
-
         }
     }
 

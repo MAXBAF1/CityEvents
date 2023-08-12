@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
             addBottomNavEl(R.id.accountFragment, R.string.account, R.drawable.ic_settings)
         } else if (accountType == AccountType.Organizer.ordinal) {
             addBottomNavEl(R.id.createEventFragment, R.string.add_event, R.drawable.ic_plus)
-            addBottomNavEl(R.id.eventStatisticsFragment, R.string.statistic, R.drawable.ic_staistic)
-            addBottomNavEl(R.id.mapFragment, R.string.map, R.drawable.ic_marker)
             addBottomNavEl(R.id.eventFragment, R.string.events, R.drawable.ic_tracks)
+            addBottomNavEl(R.id.mapFragment, R.string.map, R.drawable.ic_marker)
+            addBottomNavEl(R.id.eventStatisticsFragment, R.string.statistic, R.drawable.ic_staistic)
             addBottomNavEl(R.id.accountFragment, R.string.account, R.drawable.ic_settings)
         }
 

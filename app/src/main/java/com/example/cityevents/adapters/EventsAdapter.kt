@@ -11,12 +11,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.cityevents.R
 import com.example.cityevents.data.Event
+import com.example.cityevents.fragments.addEventFragments.FinalEventFragment
+import com.example.cityevents.fragments.eventsFragment.EventsFragment
 import java.text.DateFormatSymbols
 import java.util.Locale
 
@@ -73,25 +76,19 @@ class EventsAdapter(private val events: List<Event?>, context: Context) : Recycl
         holder.bind(event)
 
         holder.itemView.setOnClickListener {
-            val alertDialog = AlertDialog.Builder(context).create()
-            val layoutInflater = LayoutInflater.from(context)
-            val view = layoutInflater.inflate(R.layout.event_item_detailed, null)
-            initView(view, event)
-            alertDialog.setView(view)
+            val fragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val fragment = FinalEventFragment(false, event)
 
-            alertDialog.window?.setBackgroundDrawableResource(R.drawable.card_background)
-            alertDialog.show()
+            fragmentTransaction.replace(R.id.placeHolder, fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initView(view: View, event: Event) {
-        /*Glide.with(context)
-            .load(event.images)
-            .transform(RoundedCorners(30))
-            .into(view.findViewById(R.id.event_image))*/
 
-       // view.findViewById<TextView>(R.id.eventCategoryTv).text = event.category
         view.findViewById<TextView>(R.id.eventNameTv).text = event.name
         view.findViewById<TextView>(R.id.eventTimeTv).text = event.dateTime?.hour.toString()
         view.findViewById<TextView>(R.id.eventDateTv).text = event.dateTime.toString()

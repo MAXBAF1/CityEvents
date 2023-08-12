@@ -24,7 +24,10 @@ import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import java.text.DateFormatSymbols
 import java.util.Locale
 
-class FinalEventFragment(private var event: Event? = null) : Fragment() {
+class FinalEventFragment(
+    private var isDoneButtonVisible: Boolean = true,
+    private var event: Event? = null
+) : Fragment() {
     private lateinit var binding: FragmentFinalEventBinding
     private val eventModel: EventModel by activityViewModels()
 
@@ -50,7 +53,8 @@ class FinalEventFragment(private var event: Event? = null) : Fragment() {
 
     private fun setupViewPager() {
         if (event != null)
-            binding.eventPicture.adapter = event!!.images?.values?.let { FirebaseImageAdapter(it.toList()) }
+            binding.eventPicture.adapter =
+                event!!.images?.values?.let { FirebaseImageAdapter(it.toList()) }
         else
             binding.eventPicture.adapter = eventModel.images.value?.let { ViewPagerAdapter(it) }
         binding.wormDotsIndicator.setViewPager2(binding.eventPicture)
@@ -76,7 +80,8 @@ class FinalEventFragment(private var event: Event? = null) : Fragment() {
                 getString(R.string.sunday)
             else
                 daysOfWeek[selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2]
-            timeDate.text = "$dayOfWeek, ${event!!.dateTime!!.day!!} $monthName, ${event!!.dateTime!!.year!!}"
+            timeDate.text =
+                "$dayOfWeek, ${event!!.dateTime!!.day!!} $monthName, ${event!!.dateTime!!.year!!}"
         }
     }
 
@@ -87,13 +92,16 @@ class FinalEventFragment(private var event: Event? = null) : Fragment() {
     }
 
     private fun setupNextButton() {
-        binding.nextStepBtn.setOnClickListener {
-            val event = eventModel.event.value!!
-            val eventKey = eventModel.eventKey.value!!
-            Firebase().sendEventToFirebase(event, eventKey)
-            FirebaseStorageManager().uploadImagesToFirebase(eventKey, eventModel.images.value!!)
-            openFragment(MapFragment.newInstance())
-            requireActivity().supportFragmentManager.clearBackStack("")
+        if (!isDoneButtonVisible) binding.nextStepBtn.visibility = View.GONE
+        else {
+            binding.nextStepBtn.setOnClickListener {
+                val event = eventModel.event.value!!
+                val eventKey = eventModel.eventKey.value!!
+                Firebase().sendEventToFirebase(event, eventKey)
+                FirebaseStorageManager().uploadImagesToFirebase(eventKey, eventModel.images.value!!)
+                openFragment(MapFragment.newInstance())
+                requireActivity().supportFragmentManager.clearBackStack("")
+            }
         }
     }
 
