@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.cityevents.R
 import com.example.cityevents.data.DateTime
 import com.example.cityevents.databinding.FragmentDateTimePickerBinding
 import com.example.cityevents.utils.openFragment
@@ -57,7 +58,6 @@ class DateTimePickerFragment : Fragment() {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
 
         val daysOfWeek = arrayOf(
             "Понедельник",
@@ -74,16 +74,18 @@ class DateTimePickerFragment : Fragment() {
                 selectedDateTime.year = selectedYear
                 selectedDateTime.month = selectedMonth
                 selectedDateTime.day = selectedDay
-                selectedDateTime.dayOfWeek = daysOfWeek[dayOfWeek - 1]
 
                 val selectedCalendar = Calendar.getInstance()
                 selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
 
                 val dateFormatSymbols = DateFormatSymbols.getInstance(Locale("ru"))
                 val monthName = dateFormatSymbols.months[selectedMonth]
+                if (selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2 <= -1) selectedDateTime.dayOfWeek =
+                    getString(R.string.sunday)
+                else selectedDateTime.dayOfWeek = daysOfWeek[selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2]
 
                 val date =
-                    "${daysOfWeek[selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2]}, $selectedDay $monthName, $selectedYear"
+                    "${selectedDateTime.dayOfWeek}, $selectedDay $monthName, $selectedYear"
 
                 binding.dateTextView.text = date
             }, year, month, day
@@ -100,10 +102,15 @@ class DateTimePickerFragment : Fragment() {
         val timePickerDialog = TimePickerDialog(
             requireContext(),
             { _, selectedHour, selectedMinute ->
+                if (selectedHour < 10) selectedDateTime.hour = "0$selectedHour"
+                else selectedDateTime.hour = selectedHour.toString()
+
+                if (selectedMinute < 10) selectedDateTime.minute = "0$selectedMinute"
+                else selectedDateTime.minute = selectedMinute.toString()
+
                 val time =
-                    "$selectedHour:$selectedMinute"
-                selectedDateTime.hour = selectedHour
-                selectedDateTime.minute = selectedMinute
+                    "${selectedDateTime.hour}:${selectedDateTime.minute}"
+
                 binding.timeTextView.text = time
             },
             hour,

@@ -29,7 +29,7 @@ class MapFragment : Fragment() {
         mapView = binding.mapView
         marker = Marker(requireContext(), mapView)
         firebase = Firebase()
-        getEventsFromFirebase()
+        //getEventsFromFirebase()
         mapManager = MapManager(this, mapView)
         mapManager.initMap()
     }
