@@ -25,7 +25,7 @@ class WelcomeActivity : AppCompatActivity() {
         val typeSelected = sharedPreferences.getInt(IS_TYPE_SELECTED_TAG, -1)
 
         if (typeSelected != -1) {
-            startMainActivity()
+            startSelectCategoryActivity()
         }
 
         firebase = Firebase()
@@ -42,14 +42,14 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun onAccountTypeSelected(accountType: AccountType) {
         firebase.sendAccountTypeToFirebase(accountType)
-        startMainActivity()
+        startSelectCategoryActivity()
         sharedPreferences.edit {
             putInt(IS_TYPE_SELECTED_TAG, accountType.ordinal)
         }
     }
 
-    private fun startMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+    private fun startSelectCategoryActivity() {
+        val intent = Intent(this, SelectCategoryActivity::class.java)
         startActivity(intent)
         finish()
     }

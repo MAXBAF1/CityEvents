@@ -54,6 +54,15 @@ class Firebase {
         query.setValue(event)
     }
 
+    fun sendUserCategory(selectedCategories: List<String>){
+        val userCategoriesRef = FirebaseDatabase.getInstance().getReference("users/$username/categories")
+        userCategoriesRef.setValue(selectedCategories)
+            .addOnSuccessListener {
+            }
+            .addOnFailureListener {
+            }
+    }
+
     fun getAccountTypeFromFirebase(callback: (AccountType) -> Unit) {
         userRef.child("accountType").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
