@@ -86,7 +86,6 @@ class Marker(private val context: Context, private val mapView: MapView) {
         val event = gson.fromJson(marker.getData(), Event::class.java)
         val adapter = event.images?.values?.let { FirebaseImageAdapter(it.toList()) }
 
-
         val fragment = FinalEventFragment()
         fragment.viewPager.adapter = adapter
         fragment.dotsIndicator.setViewPager2(fragment.viewPager)
@@ -95,5 +94,4 @@ class Marker(private val context: Context, private val mapView: MapView) {
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
-
 }

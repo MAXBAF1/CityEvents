@@ -26,8 +26,9 @@ class FinalEventFragment : Fragment() {
     private lateinit var binding: FragmentFinalEventBinding
     private val eventModel: EventModel by activityViewModels()
 
-    lateinit var viewPager: ViewPager2
-    lateinit var dotsIndicator: WormDotsIndicator
+    private val daysOfWeek = arrayOf(
+        "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -39,53 +40,52 @@ class FinalEventFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPager = binding.eventPicture
-        dotsIndicator = binding.wormDotsIndicator
+        setupViewPager()
+        setupEventInfo()
+        setupBackButton()
+        setupNextButton()
+    }
 
-        val daysOfWeek = arrayOf(
-            "Понедельник",
-            "Вторник",
-            "Среда",
-            "Четверг",
-            "Пятница",
-            "Суббота",
-            "Воскресенье"
-        )
+    private fun setupViewPager() {
+        binding.eventPicture.adapter = eventModel.images.value?.let { ViewPagerAdapter(it) }
+        binding.wormDotsIndicator.setViewPager2(binding.eventPicture)
+    }
 
-        val adapter = eventModel.images.value?.let { ViewPagerAdapter(it) }
-        viewPager.adapter = adapter
-        dotsIndicator.setViewPager2(viewPager)
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun setupEventInfo() {
+        val event = eventModel.event.value!!
+        binding.apply {
+            category.text = event.category
+            eventName.text = event.name
+            timeTv.text = "${event.dateTime!!.hour}:${event.dateTime!!.minute}"
+            adressTv.text = event.placeAddress
+            whereAdress.text = event.placeName
 
-        binding.category.text = eventModel.event.value!!.category
-        binding.eventName.text = eventModel.event.value!!.name
-        binding.timeTv.text = "${eventModel.event.value!!.dateTime!!.hour}:${eventModel.event.value!!.dateTime!!.minute}"
-        binding.adressTv.text = eventModel.event.value!!.placeAddress
-        binding.whereAdress.text = eventModel.event.value!!.placeName
+            val selectedCalendar = Calendar.getInstance().apply {
+                set(event.dateTime!!.year!!, event.dateTime!!.month!!, event.dateTime!!.day!!)
+            }
+            val dateFormatSymbols = DateFormatSymbols.getInstance(Locale("ru"))
+            val monthName = dateFormatSymbols.months[event.dateTime!!.month!!]
+            val dayOfWeek = if (selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2 <= -1)
+                getString(R.string.sunday)
+            else
+                daysOfWeek[selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2]
+            timeDate.text = "$dayOfWeek, ${event.dateTime!!.day!!} $monthName, ${event.dateTime!!.year!!}"
+        }
+    }
 
-        var selectedYear = eventModel.event.value!!.dateTime!!.year
-        var selectedMonth = eventModel.event.value!!.dateTime!!.month
-        var selectedDay = eventModel.event.value!!.dateTime!!.day
-
-        val selectedCalendar = Calendar.getInstance()
-        selectedCalendar.set(selectedYear!!, selectedMonth!!, selectedDay!!)
-
-        val dateFormatSymbols = DateFormatSymbols.getInstance(Locale("ru"))
-        val monthName = dateFormatSymbols.months[selectedMonth!!]
-        if (selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2 <= -1) eventModel.event.value?.dateTime!!.dayOfWeek =
-            getString(R.string.sunday)
-        else eventModel.event.value?.dateTime!!.dayOfWeek = daysOfWeek[selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2]
-
-
-        binding.timeDate.text =
-            "${eventModel.event.value?.dateTime!!.dayOfWeek}, $selectedDay $monthName, $selectedYear"
-
+    private fun setupBackButton() {
         binding.backBtn.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
+    }
 
+    private fun setupNextButton() {
         binding.nextStepBtn.setOnClickListener {
-            Firebase().sendEventToFirebase(eventModel.event.value!!, eventModel.eventKey.value!!)
-            FirebaseStorageManager().uploadImagesToFirebase(eventModel.eventKey.value!!, eventModel.images.value!!)
+            val event = eventModel.event.value!!
+            val eventKey = eventModel.eventKey.value!!
+            Firebase().sendEventToFirebase(event, eventKey)
+            FirebaseStorageManager().uploadImagesToFirebase(eventKey, eventModel.images.value!!)
             openFragment(MapFragment.newInstance())
             requireActivity().supportFragmentManager.clearBackStack("")
         }
