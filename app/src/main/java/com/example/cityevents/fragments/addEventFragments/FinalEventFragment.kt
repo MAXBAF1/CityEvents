@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.cityevents.R
+import com.example.cityevents.adapters.FirebaseImageAdapter
 import com.example.cityevents.adapters.ImageAdapter
 import com.example.cityevents.adapters.ViewPagerAdapter
+import com.example.cityevents.data.Event
 import com.example.cityevents.databinding.FragmentFinalEventBinding
 import com.example.cityevents.firebase.Firebase
 import com.example.cityevents.firebase.FirebaseStorageManager
@@ -22,7 +24,7 @@ import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import java.text.DateFormatSymbols
 import java.util.Locale
 
-class FinalEventFragment : Fragment() {
+class FinalEventFragment(private var event: Event? = null) : Fragment() {
     private lateinit var binding: FragmentFinalEventBinding
     private val eventModel: EventModel by activityViewModels()
 
@@ -47,30 +49,34 @@ class FinalEventFragment : Fragment() {
     }
 
     private fun setupViewPager() {
-        binding.eventPicture.adapter = eventModel.images.value?.let { ViewPagerAdapter(it) }
+        if (event != null)
+            binding.eventPicture.adapter = event!!.images?.values?.let { FirebaseImageAdapter(it.toList()) }
+        else
+            binding.eventPicture.adapter = eventModel.images.value?.let { ViewPagerAdapter(it) }
         binding.wormDotsIndicator.setViewPager2(binding.eventPicture)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun setupEventInfo() {
-        val event = eventModel.event.value!!
+        if (event == null)
+            event = eventModel.event.value!!
         binding.apply {
-            category.text = event.category
-            eventName.text = event.name
-            timeTv.text = "${event.dateTime!!.hour}:${event.dateTime!!.minute}"
-            adressTv.text = event.placeAddress
-            whereAdress.text = event.placeName
+            category.text = event!!.category
+            eventName.text = event!!.name
+            timeTv.text = "${event!!.dateTime!!.hour}:${event!!.dateTime!!.minute}"
+            adressTv.text = event!!.placeAddress
+            whereAdress.text = event!!.placeName
 
             val selectedCalendar = Calendar.getInstance().apply {
-                set(event.dateTime!!.year!!, event.dateTime!!.month!!, event.dateTime!!.day!!)
+                set(event!!.dateTime!!.year!!, event!!.dateTime!!.month!!, event!!.dateTime!!.day!!)
             }
             val dateFormatSymbols = DateFormatSymbols.getInstance(Locale("ru"))
-            val monthName = dateFormatSymbols.months[event.dateTime!!.month!!]
+            val monthName = dateFormatSymbols.months[event!!.dateTime!!.month!!]
             val dayOfWeek = if (selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2 <= -1)
                 getString(R.string.sunday)
             else
                 daysOfWeek[selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2]
-            timeDate.text = "$dayOfWeek, ${event.dateTime!!.day!!} $monthName, ${event.dateTime!!.year!!}"
+            timeDate.text = "$dayOfWeek, ${event!!.dateTime!!.day!!} $monthName, ${event!!.dateTime!!.year!!}"
         }
     }
 
