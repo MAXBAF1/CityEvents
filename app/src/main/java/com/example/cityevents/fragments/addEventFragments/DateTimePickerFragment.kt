@@ -13,8 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.cityevents.data.DateTime
 import com.example.cityevents.databinding.FragmentDateTimePickerBinding
-import com.example.cityevents.fragments.mainFragment.MapFragment
 import com.example.cityevents.utils.openFragment
+import java.text.DateFormatSymbols
+import java.util.Locale
 
 class DateTimePickerFragment : Fragment() {
     private lateinit var binding: FragmentDateTimePickerBinding
@@ -56,14 +57,33 @@ class DateTimePickerFragment : Fragment() {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+
+        val daysOfWeek = arrayOf(
+            "Понедельник",
+            "Вторник",
+            "Среда",
+            "Четверг",
+            "Пятница",
+            "Суббота",
+            "Воскресенье"
+        )
 
         val datePickerDialog = DatePickerDialog(
             requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
                 selectedDateTime.year = selectedYear
                 selectedDateTime.month = selectedMonth
                 selectedDateTime.day = selectedDay
+                selectedDateTime.dayOfWeek = daysOfWeek[dayOfWeek - 1]
+
+                val selectedCalendar = Calendar.getInstance()
+                selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
+
+                val dateFormatSymbols = DateFormatSymbols.getInstance(Locale("ru"))
+                val monthName = dateFormatSymbols.months[selectedMonth]
+
                 val date =
-                    "You picked the following date: " + selectedDay.toString() + "/" + (selectedMonth + 1).toString() + "/" + selectedYear
+                    "${daysOfWeek[selectedCalendar.get(Calendar.DAY_OF_WEEK) - 2]}, $selectedDay $monthName, $selectedYear"
 
                 binding.dateTextView.text = date
             }, year, month, day
@@ -77,11 +97,13 @@ class DateTimePickerFragment : Fragment() {
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
 
+
+
         val timePickerDialog = TimePickerDialog(
             requireContext(),
             { _, selectedHour, selectedMinute ->
                 val time =
-                    "You picked the following time: " + selectedHour.toString() + "h" + selectedMinute.toString() + "m"
+                    "$selectedHour:$selectedMinute"
                 selectedDateTime.hour = selectedHour
                 selectedDateTime.minute = selectedMinute
                 binding.timeTextView.text = time
