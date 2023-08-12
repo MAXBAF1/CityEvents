@@ -133,7 +133,7 @@
                     android:id="@+id/eventPlaceTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="New York, Elbrus Street, 3"
+                    android:text="@string/adress"
                     android:textColor="@color/text_color"
                     android:textSize="15sp" />
 
@@ -141,7 +141,7 @@
                     android:id="@+id/eventPlaceNameTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="YOD Sports Club"
+                    android:text="@string/where_adress"
                     android:textColor="@color/second_color"
                     android:textSize="17sp" />
             </LinearLayout>

@@ -61,4 +61,7 @@
     <!--Date&time picker screen-->
     <string name="select_date_time">Select the date and time when your event will take place</string>
     <string name="done">Done</string>
+    <string name="date_location_and_cost_of_the_event">Date, location and cost of the event</string>
+    <string name="adress">New York, Elbrus Street, 3</string>
+    <string name="where_adress">YOD Sports Club</string>
 </resources>

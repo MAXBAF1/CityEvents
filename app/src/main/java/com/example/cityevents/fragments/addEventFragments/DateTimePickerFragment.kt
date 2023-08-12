@@ -49,6 +49,8 @@ class DateTimePickerFragment : Fragment() {
         binding.nextStepBtn.setOnClickListener {
             eventModel.event.value?.dateTime = selectedDateTime
             val firebase = Firebase()
+            Firebase().sendEventToFirebase(eventModel.event.value!!)
+            openFragment(FinalEventFragment.newInstance())
             val newEventRef = firebase.eventsRef.push() // Создаем новый узел с уникальным ключом
             val eventKey = newEventRef.key ?: "errorKey" // Получаем уникальный ключ
             firebase.sendEventToFirebase(eventModel.event.value!!, eventKey)
