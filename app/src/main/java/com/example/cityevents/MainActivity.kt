@@ -9,7 +9,7 @@ import com.example.cityevents.fragments.AccountFragment
 import com.example.cityevents.fragments.EventStatisticsFragment
 import com.example.cityevents.fragments.eventsFragment.EventsFragment
 import com.example.cityevents.fragments.addEventFragments.EventInfoFragment
-import com.example.cityevents.fragments.mainFragment.MapFragment
+import com.example.cityevents.fragments.MapFragment
 import com.example.cityevents.utils.AccountType
 import com.example.cityevents.utils.openFragment
 

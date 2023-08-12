@@ -37,12 +37,16 @@ class Marker(private val context: Context, private val mapView: MapView) {
     private val gson = Gson()
 
     fun addMarkerToMap(event: Event) {
-        //val drawable = AppCompatResources.getDrawable(context, R.drawable.ic_marker)
+        val drawable = AppCompatResources.getDrawable(context, R.drawable.ic_marker)
         val imageUrl = event.images?.values?.first() // Получаем ссылку на изображение
 
         val transformations = MultiTransformation(
             CenterCrop(), RoundedCorners(10)
         )
+
+        if (imageUrl == null) {
+            drawable?.toBitmap()?.let { showMarker(event, it) }
+        }
 
         Glide.with(context).asBitmap().load(imageUrl).override(100, 100).transform(transformations)
             .into(object : CustomTarget<Bitmap>() {
@@ -50,26 +54,30 @@ class Marker(private val context: Context, private val mapView: MapView) {
                     resource: Bitmap,
                     transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
                 ) {
-                    val annotationApi = mapView.annotations
-                    val pointAnnotationManager = annotationApi.createPointAnnotationManager()
-                    val pointAnnotationOptions: PointAnnotationOptions =
-                        PointAnnotationOptions().withPoint(
-                            Point.fromLngLat(
-                                event.location!!.longitude, event.location!!.latitude
-                            )
-                        ).withData(gson.toJsonTree(event)).withIconImage(resource)
-                    pointAnnotationManager.create(pointAnnotationOptions)
-                    pointAnnotationManager.addClickListener(OnPointAnnotationClickListener { annotation ->
-                        onMarkerItemClick(annotation)
-                        true
-                    })
-
+                    showMarker(event, resource)
                 }
 
                 override fun onLoadFailed(errorDrawable: Drawable?) {}
 
                 override fun onLoadCleared(placeholder: Drawable?) {}
             })
+    }
+
+    private fun showMarker(event: Event, iconImage: Bitmap) {
+        if (event.location == null) return
+        val annotationApi = mapView.annotations
+        val pointAnnotationManager = annotationApi.createPointAnnotationManager()
+        val pointAnnotationOptions: PointAnnotationOptions =
+            PointAnnotationOptions().withPoint(
+                Point.fromLngLat(
+                    event.location!!.longitude, event.location!!.latitude
+                )
+            ).withData(gson.toJsonTree(event)).withIconImage(iconImage)
+        pointAnnotationManager.create(pointAnnotationOptions)
+        pointAnnotationManager.addClickListener(OnPointAnnotationClickListener { annotation ->
+            onMarkerItemClick(annotation)
+            true
+        })
     }
 
     fun addEventsToMap(events: Iterable<Event?>) {

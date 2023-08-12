@@ -38,6 +38,9 @@ android {
 }
 
 dependencies {
+    // Parsing
+    implementation 'org.jsoup:jsoup:1.14.3'
+
     //viewpager2
     implementation 'com.tbuonomo:dotsindicator:5.0'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'

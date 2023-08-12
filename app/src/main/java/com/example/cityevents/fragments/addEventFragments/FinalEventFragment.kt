@@ -9,18 +9,15 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.viewpager2.widget.ViewPager2
 import com.example.cityevents.R
 import com.example.cityevents.adapters.FirebaseImageAdapter
-import com.example.cityevents.adapters.ImageAdapter
 import com.example.cityevents.adapters.ViewPagerAdapter
 import com.example.cityevents.data.Event
 import com.example.cityevents.databinding.FragmentFinalEventBinding
 import com.example.cityevents.firebase.Firebase
 import com.example.cityevents.firebase.FirebaseStorageManager
-import com.example.cityevents.fragments.mainFragment.MapFragment
+import com.example.cityevents.fragments.MapFragment
 import com.example.cityevents.utils.openFragment
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import java.text.DateFormatSymbols
 import java.util.Locale
 

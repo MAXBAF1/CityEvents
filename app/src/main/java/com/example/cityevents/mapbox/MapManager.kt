@@ -1,11 +1,10 @@
 package com.example.cityevents.mapbox
 
 import com.example.cityevents.R
-import com.example.cityevents.fragments.mainFragment.MapFragment
+import com.example.cityevents.fragments.MapFragment
 import com.example.cityevents.mapbox.location.*
 import com.mapbox.maps.MapView
 import com.mapbox.maps.extension.style.style
-import com.mapbox.maps.plugin.locationcomponent.location
 
 class MapManager(private val mainFragment: MapFragment, private val mapView: MapView) {
     private val map = mapView.getMapboxMap()
