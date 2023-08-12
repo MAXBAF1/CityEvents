@@ -1,5 +1,6 @@
 package com.example.cityevents.adapters
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cityevents.R
 import com.squareup.picasso.Picasso
 
-class StringImageAdapter(private val imageList: List<String>) : RecyclerView.Adapter<StringImageAdapter.ImageViewHolder>() {
+class ViewPagerAdapter(private val imageList: List<Uri>) : RecyclerView.Adapter<ViewPagerAdapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)

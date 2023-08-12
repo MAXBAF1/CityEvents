@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.example.cityevents.SignInActivity.Companion.APP_NAME
 import com.example.cityevents.databinding.ActivityWelcomeBinding
+import com.example.cityevents.firebase.Firebase
 import com.example.cityevents.utils.AccountType
 
 class WelcomeActivity : AppCompatActivity() {

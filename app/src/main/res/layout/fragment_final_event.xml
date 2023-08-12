@@ -8,10 +8,50 @@
     android:background="@color/back"
     tools:context=".fragments.addEventFragments.FinalEventFragment">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:layout_height="match_parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/btn_black_background"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/nextStepBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/btn_orange_background"
+            android:text="@string/done"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -55,7 +95,6 @@
                     android:id="@+id/event_name_box"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:background="@drawable/layout_bg"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -197,42 +236,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-                <Button
-                    android:id="@+id/backBtn"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:background="@drawable/btn_black_background"
-                    android:text="@string/back"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <Button
-                    android:id="@+id/nextStepBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/btn_orange_background"
-                    android:text="@string/done"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
