@@ -32,7 +32,9 @@ class EventInfoFragment : Fragment() {
         setupCategorySpinner()
 
         binding.nextStepBtn.setOnClickListener {
-            eventModel.event.value = Event(binding.edEventName.text.toString(), selectedCategory, binding.edDescription.text.toString())
+            eventModel.event.value = Event(
+                binding.edEventName.text.toString(), selectedCategory, binding.edDescription.text.toString(), placeName = binding.placeAdressEd.text.toString()
+            )
             openFragment(AddImagesFragment.newInstance())
         }
     }
