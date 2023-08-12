@@ -20,8 +20,8 @@ class FinalEventFragment : Fragment() {
     private lateinit var binding: FragmentFinalEventBinding
     private val eventModel: EventModel by activityViewModels()
 
-    private lateinit var viewPager: ViewPager2
-    private lateinit var dotsIndicator: WormDotsIndicator
+    lateinit var viewPager: ViewPager2
+    lateinit var dotsIndicator: WormDotsIndicator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

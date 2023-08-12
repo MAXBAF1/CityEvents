@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cityevents.R
 import com.squareup.picasso.Picasso
 
-class ViewPagerAdapter(private val imageList: List<Uri>) :
-    RecyclerView.Adapter<ViewPagerAdapter.ImageViewHolder>() {
+class FirebaseImageAdapter(private val imageList: List<String>) :
+RecyclerView.Adapter<FirebaseImageAdapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
