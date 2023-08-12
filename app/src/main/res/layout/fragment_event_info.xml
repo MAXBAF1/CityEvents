@@ -105,6 +105,36 @@
         app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
+
+    <TextView
+        android:id="@+id/place_adress"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/write_a_description_of_the_venue"
+        android:textColor="@color/text_color"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/categorySpinner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/categorySpinner"
+        app:layout_constraintTop_toBottomOf="@+id/edDescription" />
+
+    <EditText
+        android:id="@+id/place_adress_ed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:textColor="@color/second_color"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView13"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/place_adress" />
+
     <Button
         android:id="@+id/nextStepBtn"
         android:layout_width="wrap_content"
