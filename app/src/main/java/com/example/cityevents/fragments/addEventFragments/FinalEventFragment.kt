@@ -89,11 +89,22 @@ class FinalEventFragment(
         binding.backBtn.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
+
+        binding.arrowBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
     }
 
     private fun setupNextButton() {
-        if (!isDoneButtonVisible) binding.nextStepBtn.visibility = View.GONE
-        else {
+        if (!isDoneButtonVisible) {
+            binding.nextStepBtn.visibility = View.GONE
+            binding.backBtn.visibility = View.GONE
+            binding.arrowBack.visibility = View.VISIBLE
+        } else {
+            binding.nextStepBtn.visibility = View.VISIBLE
+            binding.backBtn.visibility = View.VISIBLE
+            binding.arrowBack.visibility = View.GONE
+
             binding.nextStepBtn.setOnClickListener {
                 val event = eventModel.event.value!!
                 val eventKey = eventModel.eventKey.value!!
