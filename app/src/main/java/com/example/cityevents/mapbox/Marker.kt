@@ -93,7 +93,7 @@ class Marker(private val context: Context, private val mapView: MapView) {
         val fragmentTransaction = fragmentManager.beginTransaction()
         val event = gson.fromJson(marker.getData(), Event::class.java)
 
-        val fragment = FinalEventFragment(event)
+        val fragment = FinalEventFragment(false, event)
 
         fragmentTransaction.replace(R.id.placeHolder, fragment)
         fragmentTransaction.addToBackStack(null)

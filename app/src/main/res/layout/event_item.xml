@@ -2,59 +2,115 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@color/back">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="7dp"
+        android:background="@color/white"
         android:foregroundGravity="center|center_horizontal"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingTop="5dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="5dp">
+            android:paddingRight="10dp">
 
-            <ImageView
-                android:id="@+id/photoImageView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/event_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintCircleRadius="15dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/category_imv"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@color/first_color"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/baseline_fitness_center_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="-13dp"
+                    android:src="@drawable/flag"
+                    app:layout_constraintEnd_toEndOf="@id/category_imv"
+                    app:layout_constraintStart_toStartOf="@id/category_imv"
+                    app:layout_constraintTop_toBottomOf="@id/category_imv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:id="@+id/worm_dots_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="-30dp"
+                android:layout_marginEnd="8dp"
+                app:dotsColor="@color/md_white_1000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/event_picture" />
 
             <TextView
                 android:id="@+id/eventNameTextView"
-                android:layout_width="135dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="25dp"
                 android:fontFamily="sans-serif"
                 android:singleLine="true"
                 android:text="TextView"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="17sp"
+                android:textStyle="bold"
                 app:autoSizeTextType="uniform" />
 
-            <TextView
-                android:id="@+id/eventCategoryTv"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:text="TextView"
-                android:textColor="@color/text_color"
-                android:textSize="14sp" />
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_marker_orange" />
+
+                <TextView
+                    android:id="@+id/event_info_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="TextView"
+                    android:textColor="@color/first_color"
+                    android:textSize="15sp" />
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -31,7 +31,6 @@ class EventsFragment : Fragment() {
         val firebase = Firebase()
         firebase.getEventsFromFirebase { events ->
             setEvents(events)
-
         }
     }
 
@@ -42,7 +41,7 @@ class EventsFragment : Fragment() {
 
             val firebase = Firebase()
             firebase.getEventsFromFirebase { events ->
-                val adapter = EventsAdapter(events, requireContext())
+                val adapter = EventsAdapter(events.reversed(), requireContext())
                 binding.eventsRecyclerView.adapter = adapter
             }
         }
