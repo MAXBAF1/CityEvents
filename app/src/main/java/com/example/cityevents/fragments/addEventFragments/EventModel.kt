@@ -13,4 +13,8 @@ open class EventModel : ViewModel() {
     val images: MutableLiveData<List<Uri>> by lazy {
         MutableLiveData<List<Uri>>()
     }
+
+    val eventKey: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 }
