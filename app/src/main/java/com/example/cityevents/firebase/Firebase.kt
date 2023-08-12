@@ -75,7 +75,9 @@ class Firebase {
             if (task.isSuccessful) {
                 val snapshot = task.result
                 val usersEvents = snapshot.children.map { data ->
-                    data.child("events").children.map { it.getValue(Event::class.java) }
+                    data.child("events").children.map {
+                        it.getValue(Event::class.java)
+                    }
                 }
                 callback(usersEvents.flatten())
                 //callback(child.map { data -> data.getValue(Event::class.java)!! })

@@ -11,6 +11,7 @@ import com.example.cityevents.adapters.ImageAdapter
 import com.example.cityevents.adapters.ViewPagerAdapter
 import com.example.cityevents.databinding.FragmentFinalEventBinding
 import com.example.cityevents.firebase.Firebase
+import com.example.cityevents.firebase.FirebaseStorageManager
 import com.example.cityevents.fragments.mainFragment.MapFragment
 import com.example.cityevents.utils.openFragment
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
@@ -44,6 +45,7 @@ class FinalEventFragment : Fragment() {
 
         binding.nextStepBtn.setOnClickListener {
             Firebase().sendEventToFirebase(eventModel.event.value!!, eventModel.eventKey.value!!)
+            FirebaseStorageManager().uploadImagesToFirebase(eventModel.eventKey.value!!, eventModel.images.value!!)
             openFragment(MapFragment.newInstance())
             requireActivity().supportFragmentManager.clearBackStack("")
         }

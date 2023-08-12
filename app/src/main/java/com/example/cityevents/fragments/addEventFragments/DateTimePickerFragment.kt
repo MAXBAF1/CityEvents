@@ -97,8 +97,6 @@ class DateTimePickerFragment : Fragment() {
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
 
-
-
         val timePickerDialog = TimePickerDialog(
             requireContext(),
             { _, selectedHour, selectedMinute ->

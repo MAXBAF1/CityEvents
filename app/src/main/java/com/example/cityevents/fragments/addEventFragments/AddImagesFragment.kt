@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cityevents.adapters.ImageAdapter
 import com.example.cityevents.data.Event
 import com.example.cityevents.databinding.FragmentAddImagesBinding
+import com.example.cityevents.firebase.Firebase
+import com.example.cityevents.firebase.FirebaseStorageManager
 import com.example.cityevents.utils.openFragment
 import java.util.*
 
@@ -65,7 +67,13 @@ class AddImagesFragment : Fragment() {
         }
 
         binding.nextStepBtn.setOnClickListener {
+            val firebase = Firebase()
+            val newEventRef = firebase.eventsRef.push() // Создаем новый узел с уникальным ключом
+            val eventKey = newEventRef.key ?: "errorKey" // Получаем уникальный ключ
+
+            eventModel.eventKey.value = eventKey
             eventModel.images.value = selectedImages
+
             openFragment(LocationPickerFragment.newInstance())
         }
     }

@@ -11,7 +11,7 @@ class FirebaseStorageManager {
     private fun uploadImageToFirebase(eventKey: String, imageId: String, imageUri: Uri) {
         val imageRef = storageRef.child("${firebase.username}/events/$eventKey/images/$imageId.jpg")
         imageRef.putFile(imageUri)
-            .addOnSuccessListener { taskSnapshot ->
+            .addOnSuccessListener {
                 imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
                     // imageUrl содержит ссылку на загруженную картинку
 

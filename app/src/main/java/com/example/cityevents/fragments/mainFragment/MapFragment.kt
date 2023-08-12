@@ -36,7 +36,7 @@ class MapFragment : Fragment() {
 
     private fun getEventsFromFirebase() {
         firebase.getEventsFromFirebase { events ->
-            marker.addMarkersToMap(events.map { it?.location!! })
+            marker.addEventsToMap(events)
         }
     }
 
