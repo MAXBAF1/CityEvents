@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.cityevents.Firebase
 import com.example.cityevents.data.DateTime
 import com.example.cityevents.databinding.FragmentDateTimePickerBinding
 import com.example.cityevents.fragments.mainFragment.MapFragment
@@ -47,9 +46,7 @@ class DateTimePickerFragment : Fragment() {
 
         binding.nextStepBtn.setOnClickListener {
             eventModel.event.value?.dateTime = selectedDateTime
-            Firebase().sendEventToFirebase(eventModel.event.value!!)
-            openFragment(MapFragment.newInstance())
-            requireActivity().supportFragmentManager.clearBackStack("")
+            openFragment(FinalEventFragment.newInstance())
         }
     }
 
