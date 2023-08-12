@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.cityevents.firebase.Firebase
 import com.example.cityevents.databinding.FragmentMapBinding
 import com.example.cityevents.mapbox.MapManager
 import com.example.cityevents.mapbox.Marker
 import com.mapbox.maps.MapView
+import kotlinx.coroutines.launch
 
 class MapFragment : Fragment() {
     private lateinit var binding: FragmentMapBinding
@@ -29,7 +31,7 @@ class MapFragment : Fragment() {
         mapView = binding.mapView
         marker = Marker(requireContext(), mapView)
         firebase = Firebase()
-        //getEventsFromFirebase()
+        getEventsFromFirebase()
         mapManager = MapManager(this, mapView)
         mapManager.initMap()
     }
@@ -37,6 +39,7 @@ class MapFragment : Fragment() {
     private fun getEventsFromFirebase() {
         firebase.getEventsFromFirebase { events ->
             marker.addEventsToMap(events)
+
         }
     }
 
