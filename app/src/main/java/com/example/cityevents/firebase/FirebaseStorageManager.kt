@@ -31,11 +31,4 @@ class FirebaseStorageManager {
             uploadImageToFirebase(eventKey, index.toString(), uri)
         }
     }
-
-    fun getImageFromFirebase(eventKey: DatabaseReference, callback: (Uri) -> Unit) {
-        val imageRef = storageRef.child("events/$eventKey/images/image.jpg")
-
-
-
-    }
 }

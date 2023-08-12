@@ -21,12 +21,10 @@ class FinalEventFragment : Fragment() {
 
     private lateinit var viewPager: ViewPager2
     private lateinit var dotsIndicator: WormDotsIndicator
-    private lateinit var imageList: List<String>
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         binding = FragmentFinalEventBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,14 +34,15 @@ class FinalEventFragment : Fragment() {
         viewPager = binding.eventPicture
         dotsIndicator = binding.wormDotsIndicator
 
-
         val adapter = eventModel.images.value?.let { ViewPagerAdapter(it) }
         viewPager.adapter = adapter
         dotsIndicator.setViewPager2(viewPager)
 
+        binding.backBtn.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+
         binding.nextStepBtn.setOnClickListener {
-
-
             Firebase().sendEventToFirebase(eventModel.event.value!!, eventModel.eventKey.value!!)
             openFragment(MapFragment.newInstance())
             requireActivity().supportFragmentManager.clearBackStack("")
