@@ -7,11 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.cityevents.Firebase
-import com.example.cityevents.R
+import com.example.cityevents.firebase.Firebase
 import com.example.cityevents.SignInActivity
 import com.example.cityevents.databinding.FragmentAccountBinding
-import com.example.cityevents.databinding.FragmentMapBinding
 
 class AccountFragment : Fragment() {
     private lateinit var binding: FragmentAccountBinding

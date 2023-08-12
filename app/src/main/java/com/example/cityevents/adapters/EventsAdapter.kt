@@ -27,14 +27,14 @@ class EventsAdapter(
         private val categoryTv: TextView = itemView.findViewById(R.id.eventCategoryTv)
 
         fun bind(event: Event) {
-            loadImage(event.images?.first(), imageView)
+            //loadImage(event.images?.first(), imageView)
             nameTextView.text = event.name
             categoryTv.text = event.category
         }
     }
 
-    private fun loadImage(url: String?, imageView: ImageView) {
-        if (url.isNullOrEmpty()) {
+    private fun loadImage(url: Uri?, imageView: ImageView) {
+        if (url == null) {
             Glide.with(context)
                 .load(R.mipmap.ic_launcher)
                 .transform(RoundedCorners(10))
@@ -73,10 +73,10 @@ class EventsAdapter(
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initView(view: View, event: Event) {
-        Glide.with(context)
+        /*Glide.with(context)
             .load(event.images)
             .transform(RoundedCorners(30))
-            .into(view.findViewById(R.id.event_image))
+            .into(view.findViewById(R.id.event_image))*/
 
         view.findViewById<TextView>(R.id.eventCategoryTv).text = event.category
         view.findViewById<TextView>(R.id.eventNameTv).text = event.name

@@ -65,7 +65,7 @@ class AddImagesFragment : Fragment() {
         }
 
         binding.nextStepBtn.setOnClickListener {
-            eventModel.event.value!!.images = selectedImages.map { it.toString() }
+            eventModel.images.value = selectedImages
             openFragment(LocationPickerFragment.newInstance())
         }
     }

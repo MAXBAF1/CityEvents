@@ -1,4 +1,4 @@
-package com.example.cityevents
+package com.example.cityevents.firebase
 
 import android.util.Log
 import com.example.cityevents.data.Event
@@ -10,20 +10,23 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 class Firebase {
-    private var username: String
-    private var eventsRef: DatabaseReference
+    var username: String
+    private var usersRef: DatabaseReference
     var userRef: DatabaseReference
+    var eventsRef: DatabaseReference
 
     private var auth: FirebaseAuth = Firebase.auth
     private val sdf = SimpleDateFormat("dd:MM:yyyy", Locale.getDefault())
 
     init {
         val database = FirebaseDatabase.getInstance()
+        usersRef = database.getReference("users")
         username = auth.currentUser!!.displayName.toString()
-        eventsRef = database.getReference("events")
-        userRef = database.getReference("users").child(username)
+        userRef = usersRef.child(username)
+        eventsRef = userRef.child("events")
     }
 
     fun loadUser() {
@@ -46,8 +49,8 @@ class Firebase {
         userRef.child("accountType").setValue(accountType.name)
     }
 
-    fun sendEventToFirebase(event: Event) {
-        val query = eventsRef.child(userRef.push().key ?: "blablabla")
+    fun sendEventToFirebase(event: Event, eventKey: String) {
+        val query = eventsRef.child(eventKey)
         query.setValue(event)
     }
 
@@ -67,15 +70,22 @@ class Firebase {
         })
     }
 
-    fun getEventsFromFirebase(callback: (List<Event>) -> Unit) {
-        eventsRef.get().addOnCompleteListener { task ->
+    fun getEventsFromFirebase(callback: (List<Event?>) -> Unit) {
+        usersRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val snapshot = task.result
-                callback(snapshot.children.map { data -> data.getValue(Event::class.java)!! })
+                val usersEvents = snapshot.children.map { data ->
+                    data.child("events").children.map { it.getValue(Event::class.java) }
+                }
+                callback(usersEvents.flatten())
+                //callback(child.map { data -> data.getValue(Event::class.java)!! })
             }
         }
     }
 
+    private fun getUserEvents(userRef: DatabaseReference, callback: (List<Event>) -> Unit) {
+
+    }
     fun signOut() {
         auth.signOut()
     }

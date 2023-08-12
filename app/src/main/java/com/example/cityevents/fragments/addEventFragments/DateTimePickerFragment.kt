@@ -11,9 +11,10 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.cityevents.Firebase
+import com.example.cityevents.firebase.Firebase
 import com.example.cityevents.data.DateTime
 import com.example.cityevents.databinding.FragmentDateTimePickerBinding
+import com.example.cityevents.firebase.FirebaseStorageManager
 import com.example.cityevents.fragments.mainFragment.MapFragment
 import com.example.cityevents.utils.openFragment
 
@@ -47,7 +48,14 @@ class DateTimePickerFragment : Fragment() {
 
         binding.nextStepBtn.setOnClickListener {
             eventModel.event.value?.dateTime = selectedDateTime
-            Firebase().sendEventToFirebase(eventModel.event.value!!)
+            val firebase = Firebase()
+            val newEventRef = firebase.eventsRef.push() // Создаем новый узел с уникальным ключом
+            val eventKey = newEventRef.key ?: "errorKey" // Получаем уникальный ключ
+            firebase.sendEventToFirebase(eventModel.event.value!!, eventKey)
+
+            eventModel.images.value?.let { uris ->
+                FirebaseStorageManager().uploadImagesToFirebase(eventKey, uris)
+            }
             openFragment(MapFragment.newInstance())
             requireActivity().supportFragmentManager.clearBackStack("")
         }
@@ -81,17 +89,13 @@ class DateTimePickerFragment : Fragment() {
         val minute = calendar.get(Calendar.MINUTE)
 
         val timePickerDialog = TimePickerDialog(
-            requireContext(),
-            { _, selectedHour, selectedMinute ->
+            requireContext(), { _, selectedHour, selectedMinute ->
                 val time =
                     "You picked the following time: " + selectedHour.toString() + "h" + selectedMinute.toString() + "m"
                 selectedDateTime.hour = selectedHour
                 selectedDateTime.minute = selectedMinute
                 binding.timeTextView.text = time
-            },
-            hour,
-            minute,
-            true
+            }, hour, minute, true
         )
         timePickerDialog.show()
     }
