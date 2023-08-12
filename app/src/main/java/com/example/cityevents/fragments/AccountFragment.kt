@@ -7,9 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.cityevents.firebase.Firebase
 import com.example.cityevents.SignInActivity
 import com.example.cityevents.databinding.FragmentAccountBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class AccountFragment : Fragment() {
     private lateinit var binding: FragmentAccountBinding
@@ -24,7 +29,18 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpUserPicture(binding.avatar, binding.username)
+        val firebase = Firebase()
+        firebase.getAccountTypeFromFirebase {
+            role -> binding.role.text = role.name
+        }
         buttonSignOut()
+    }
+
+    private fun setUpUserPicture(imageView: ImageView, userName: TextView) {
+        Glide.with(this).load(FirebaseAuth.getInstance().currentUser?.photoUrl)
+            .transform(RoundedCorners(300)).into(imageView)
+        userName.text = FirebaseAuth.getInstance().currentUser!!.displayName
     }
 
     private fun buttonSignOut() {
