@@ -21,6 +21,7 @@ import com.example.cityevents.data.Event
 import com.example.cityevents.firebase.Firebase
 import com.example.cityevents.fragments.addEventFragments.FinalEventFragment
 import com.example.cityevents.fragments.eventsFragment.EventsFragment
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import java.text.DateFormatSymbols
 import java.util.Locale
 
@@ -36,6 +37,7 @@ class EventsAdapter(private val events: List<Event?>, context: Context) :
         private val eventInfo: TextView = itemView.findViewById(R.id.event_info_tv)
         private val favorite: ImageView = itemView.findViewById(R.id.unfavorite_button)
         private val unfavorite: ImageView = itemView.findViewById(R.id.favorite_button)
+        private val wormDotsIndicator: WormDotsIndicator = itemView.findViewById(R.id.worm_dots_indicator)
 
         private val gradientDrawable = GradientDrawable().apply {
             cornerRadius = context.resources.getDimension(R.dimen.corner_radius)
@@ -74,6 +76,8 @@ class EventsAdapter(private val events: List<Event?>, context: Context) :
         fun bind(event: Event) {
             val adapter = ViewPagerEventAdapter(event.images?.values!!.toList())
             viewPager.adapter = adapter
+            wormDotsIndicator.setViewPager2(viewPager)
+
             viewPager.background = gradientDrawable
 
             val categories = context.resources.getStringArray(R.array.event_categories)
