@@ -1,7 +1,6 @@
 package com.example.cityevents.parsing
 
 import android.content.Context
-import android.location.Address
 import android.location.Geocoder
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -23,30 +22,34 @@ class Parsing(val context: Context) {
     private val mainUrl = "https://afisha7.ru"
     private var events = mutableListOf<Event>()
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun getEventsFromWeb(callback: (List<Event>) -> Unit) {
         (context as AppCompatActivity).lifecycleScope.launch(Dispatchers.IO) {
             TrustAllCertificates.enableTrustAllCertificates()
 
-            getEventsHtml().forEachIndexed { index, eventHtml ->
-                addNames(eventHtml)
-                addDates(eventHtml, index)
-                addCategories(eventHtml, index)
-                addPlaceNameAndAddress(eventHtml, index)
-                addImages(eventHtml, index)
-                addDescriptions(eventHtml, index)
-            }
+            for (i in 1..3) {
 
+                getEventsHtml("$mainUrl/ekaterinburg?page=$i").forEachIndexed { index, eventHtml ->
+                    val cnt = events.size
+                    if (addCategories(eventHtml, cnt)) {
+                        addNames(eventHtml, cnt)
+                        addDates(eventHtml, cnt)
+
+                        addPlaceNameAndAddress(eventHtml, cnt)
+                        addImages(eventHtml, cnt)
+                    }
+
+                }
+            }
             callback(events)
         }
     }
 
-    private fun addDescriptions(eventHtml: Element, eventIndex: Int) {
-        val desc = eventHtml.children()
-    }
-
     private fun addImages(eventHtml: Element, eventIndex: Int) {
-        val image = eventHtml.children()[2].children()[0].children()[0].children()[0].attr("data-src").toString()
+        var image = eventHtml.children()[2].children()[0].children()[0].children()[0].attr("data-src").toString()
+        if (image.startsWith("/upload"))
+            image = mainUrl + image
         events[eventIndex].images = hashMapOf(Pair("", image))
     }
 
@@ -68,7 +71,7 @@ class Parsing(val context: Context) {
         val address = doc.body()
             .children()[2].children()[0].children()[0].children()[0].children()[1].children()[1].children()[0].children()[1].childNodes()[2].toString()
         events[eventIndex].placeAddress = address
-        events[eventIndex].location = getLocationFromAddress(address)
+        events[eventIndex].location = getLocationFromAddress("Екатеринбург, $address")
     }
 
     private fun getLocationFromAddress(address: String): LocationSerializable? {
@@ -91,11 +94,14 @@ class Parsing(val context: Context) {
     }
 
 
-    private fun addCategories(eventHtml: Element, eventIndex: Int) {
+    private fun addCategories(eventHtml: Element, eventIndex: Int): Boolean {
         val dateCategoryNode = eventHtml.children()[1].children()[0].children()
 
         val category = dateCategoryNode[1].children()[1].childNodes()[0].toString()
-        events[eventIndex].category = category
+        if (category == "Кино")
+            return false
+        events.add(Event(category = category))
+        return true
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -110,13 +116,14 @@ class Parsing(val context: Context) {
         )
     }
 
-    private fun addNames(eventHtml: Element) {
+    private fun addNames(eventHtml: Element, eventIndex: Int) {
         val name = eventHtml.children()[0].children()[0].children()[0].childNodes()[0].toString()
-        events.add(Event(name))
+        events[eventIndex].name = name
     }
 
-    private fun getEventsHtml(): Elements {
-        val doc = Jsoup.connect("$mainUrl/ekaterinburg").userAgent("Mozilla").get()
+    private fun getEventsHtml(url: String): Elements {
+
+        val doc = Jsoup.connect(url).userAgent("Mozilla").get()
 
         val eventsHtml = doc.body()
             .children()[2].children()[0].children()[0].children()[0].children()[2].children()[0].children()
