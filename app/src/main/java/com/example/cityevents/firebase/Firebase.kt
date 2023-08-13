@@ -1,19 +1,24 @@
 package com.example.cityevents.firebase
 
 import android.util.Log
+import com.example.cityevents.data.DateTime
 import com.example.cityevents.data.Event
+import com.example.cityevents.data.EventInternet
+import com.example.cityevents.data.LocationSerializable
 import com.example.cityevents.utils.AccountType
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.ktx.Firebase
+import java.security.MessageDigest
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 
 class Firebase {
     var username: String
+    var internetEventsRef: DatabaseReference
     private var usersRef: DatabaseReference
     var userRef: DatabaseReference
     var eventsRef: DatabaseReference
@@ -23,6 +28,7 @@ class Firebase {
 
     init {
         val database = FirebaseDatabase.getInstance()
+        internetEventsRef = database.getReference("internetEvents")
         usersRef = database.getReference("users")
         username = auth.currentUser!!.displayName.toString()
         userRef = usersRef.child(username)
@@ -45,6 +51,46 @@ class Firebase {
         Log.e("item", auth.currentUser?.displayName.toString())
     }
 
+    fun sendInternetEvents(events: List<Event>) {
+        val eventsInternet = events.map { EventInternet(it) }
+        for (event in eventsInternet) {
+            internetEventsRef.child(internetEventsRef.push().key ?: "").setValue(event)
+        }
+    }
+
+    fun getInternetEvents(callback: (List<Event?>) -> Unit) {
+        internetEventsRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val eventList: MutableList<Event> = mutableListOf()
+
+                // Проходимся по каждому дочернему элементу узла internetEventsRef
+                for (eventSnapshot in snapshot.children) {
+                    val eventMap: Map<String, Any>? = eventSnapshot.value as? Map<String, Any>
+                    if (eventMap != null) {
+                        val event = Event(
+                            name = eventMap["name"] as? String,
+                            category = eventMap["category"] as? String,
+                            description = eventMap["description"] as? String,
+                            images = eventMap["images"] as? HashMap<String, String>,
+                            location = eventMap["location"] as? LocationSerializable,
+                            placeAddress = eventMap["placeAddress"] as? String,
+                            placeName = eventMap["placeName"] as? String,
+                            dateTime = eventMap["dateTime"] as? DateTime,
+                            isLiked = eventMap["liked"] as? Boolean ?: false
+                        )
+                        eventList.add(event)
+                    }
+                }
+
+                callback(eventList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Обработка ошибок
+            }
+        })
+    }
+
     fun sendAccountTypeToFirebase(accountType: AccountType) {
         userRef.child("accountType").setValue(accountType.name)
     }
@@ -62,8 +108,9 @@ class Firebase {
         userRef.child("likedEvents").child(eventKey).removeValue()
     }
 
-    fun sendUserCategory(selectedCategories: List<String>){
-        val userCategoriesRef = FirebaseDatabase.getInstance().getReference("users/$username/categories")
+    fun sendUserCategory(selectedCategories: List<String>) {
+        val userCategoriesRef =
+            FirebaseDatabase.getInstance().getReference("users/$username/categories")
         userCategoriesRef.setValue(selectedCategories)
             .addOnSuccessListener {
             }
@@ -121,6 +168,7 @@ class Firebase {
     private fun getUserEvents(userRef: DatabaseReference, callback: (List<Event>) -> Unit) {
 
     }
+
     fun signOut() {
         auth.signOut()
     }

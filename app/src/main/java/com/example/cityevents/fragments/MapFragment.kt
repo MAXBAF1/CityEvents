@@ -48,7 +48,11 @@ class MapFragment : Fragment() {
         mapManager = MapManager(this, mapView)
         mapManager.initMap()
 
+       /* firebase.getInternetEvents {
+            marker.addEventsToMap(it)
+        }*/
         Parsing(requireContext()).getEventsFromWeb {
+            //firebase.sendInternetEvents(it)
             marker.addEventsToMap(it)
         }
     }

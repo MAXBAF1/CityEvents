@@ -70,7 +70,7 @@ class Parsing(val context: Context) {
 
         val address = doc.body()
             .children()[2].children()[0].children()[0].children()[0].children()[1].children()[1].children()[0].children()[1].childNodes()[2].toString()
-        events[eventIndex].placeAddress = address
+        events[eventIndex].placeAddress = address.replace(",", " ").replace(".", " ")
         events[eventIndex].location = getLocationFromAddress("Екатеринбург, $address")
     }
 
