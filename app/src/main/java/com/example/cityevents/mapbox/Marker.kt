@@ -37,7 +37,7 @@ class Marker(private val context: Context, private val mapView: MapView) {
     private val gson = Gson()
 
     fun addMarkerToMap(event: Event) {
-        val drawable = AppCompatResources.getDrawable(context, R.drawable.ic_marker)
+        val drawable = AppCompatResources.getDrawable(context, R.drawable.ic_marker_orange)
         val imageUrl = event.images?.values?.first() // Получаем ссылку на изображение
 
         val transformations = MultiTransformation(

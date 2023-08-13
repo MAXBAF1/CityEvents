@@ -48,7 +48,7 @@
                     android:id="@+id/category_imv"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="13dp"
                     android:background="@color/first_color"
                     android:scaleType="centerInside"
                     android:src="@drawable/baseline_fitness_center_24"
@@ -63,6 +63,29 @@
                     app:layout_constraintEnd_toEndOf="@id/category_imv"
                     app:layout_constraintStart_toStartOf="@id/category_imv"
                     app:layout_constraintTop_toBottomOf="@id/category_imv" />
+
+                <ImageView
+                    android:id="@+id/unfavorite_button"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/baseline_favorite_24"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="gone"
+                    android:scaleType="centerInside"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/favorite_button"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/baseline_favorite_border_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

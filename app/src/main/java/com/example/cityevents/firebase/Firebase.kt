@@ -54,6 +54,14 @@ class Firebase {
         query.setValue(event)
     }
 
+    fun addLikedEvent(eventKey: String) {
+        userRef.child("likedEvents").child(eventKey).setValue(true)
+    }
+
+    fun removeLikedEvent(eventKey: String) {
+        userRef.child("likedEvents").child(eventKey).removeValue()
+    }
+
     fun sendUserCategory(selectedCategories: List<String>){
         val userCategoriesRef = FirebaseDatabase.getInstance().getReference("users/$username/categories")
         userCategoriesRef.setValue(selectedCategories)
@@ -90,6 +98,22 @@ class Firebase {
                 }
                 callback(usersEvents.flatten())
                 //callback(child.map { data -> data.getValue(Event::class.java)!! })
+            }
+        }
+    }
+
+    fun getLikedEventsFromFirebase(callback: (List<Event?>) -> Unit) {
+        usersRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                val usersEvents = snapshot.children.map { data ->
+                    data.child("events").children.map {
+                        val event = it.getValue(Event::class.java)
+                        event?.isLiked = data.child("likedEvents").hasChild(event?.name!!)
+                        event
+                    }
+                }
+                callback(usersEvents.flatten())
             }
         }
     }

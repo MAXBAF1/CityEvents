@@ -11,4 +11,5 @@ data class Event(
     var placeAddress: String? = null,
     var placeName: String? = null,
     var dateTime: DateTime? = null,
+    var isLiked: Boolean = false
 ) : java.io.Serializable
