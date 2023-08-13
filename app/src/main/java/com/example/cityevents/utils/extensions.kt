@@ -43,7 +43,6 @@ fun ImageView.loadImage(url: String?) {
     }
 }
 
-
 fun Fragment.openFragment(f: Fragment) {
     (activity as AppCompatActivity).supportFragmentManager.beginTransaction()
         .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -52,7 +51,7 @@ fun Fragment.openFragment(f: Fragment) {
 
 fun AppCompatActivity.openFragment(nextFragment: Fragment) {
     val fragmentTransaction = supportFragmentManager.beginTransaction()
-        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
     val currentFragment = supportFragmentManager.fragments.firstOrNull()
 

@@ -85,10 +85,9 @@ class LocationManager(private val mapView: MapView, private val context: Context
         mapboxMap.setCamera(CameraOptions.Builder().bearing(0.0).build())
 
         mapView.compass.fadeWhenFacingNorth = false
-        mapView.compass.marginTop = 1500F
+        mapView.compass.marginTop = 2000F
         mapView.scalebar.enabled = false
     }
-
 
     private fun onCameraTrackingDismissed() {
         locationPlugin.removeOnIndicatorPositionChangedListener(positionChangedListener)

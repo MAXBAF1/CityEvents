@@ -66,7 +66,7 @@
     <string name="choose_date">Выберите дату</string>
     <string name="choose_time">Выберите время</string>
     <string name="sunday">Воскресенье</string>
-    <string name="write_a_description_of_the_venue">Напишите описание</string>
+    <string name="write_a_description_of_the_venue">Напишите название места</string>
     <string name="save">Сохранить</string>
     <string name="social">Общество</string>
     <string name="entertainment">Развлечения</string>
