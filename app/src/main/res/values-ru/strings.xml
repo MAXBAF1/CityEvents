@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CityEvents</string>
+
+    <!--Bottom menu-->
+    <string name="map">Карта</string>
+    <string name="account">Аккаунт</string>
+    <string name="events">События</string>
+    <string name="add_event">Добавить событие</string>
+    <string name="statistic">Статистика</string>
+
+    <string name="location_permission">Location permission is needed</string>
+
+    <string name="hello_blank_fragment">Тут пусто</string>
+
+    <!--Sign in screen-->
+    <string name="sign_in">Вход</string>
+
+    <!--Welcome screen-->
+    <string name="welcome">Добро пожаловать в CityEvents</string>
+    <string name="welcome_desc">Это приложение является платформой для участников и организаторов мероприятий</string>
+    <string name="search_event">Ищу мероприятие</string>
+    <string name="organizer">Я организатор</string>
+
+    <!--Events screen-->
+    <string name="date_and_place">Дата и место проведения мероприятия</string>
+    <string name="description">Описание</string>
+
+    <!--Account screen-->
+    <string name="exit">Выход</string>
+
+    <!--Event info screen-->
+    <string name="craft_event">Создайте свое мероприятие</string>
+    <string name="add_name">Добавьте привлекательное название для вашего мероприятия</string>
+    <string name="select_category">Выберите подходящую категорию для классификации вашего мероприятия</string>
+    <string name="craft_description">Подготовьте подробное описание, чтобы заинтересовать посетителей</string>
+    <string-array name="event_categories">
+        <item>Выберите категорию</item>
+        <item>Культура</item>
+        <item>Спорт</item>
+        <item>Образование</item>
+        <item>Развлечение</item>
+        <item>Общество</item>
+        <item>Дети &amp; Семья</item>
+    </string-array>
+    Выберите место, где будет проходить ваше мероприятие
+    <!--Add images screen-->
+    <string name="add_photos">Добавьте фотографии, которые хорошо опишут атмосферу вашего мероприятия</string>
+    <string name="possible_add_photo">Добавить фотографию можно после публикации мероприятия</string>
+    <string name="add">Добавить</string>
+    <string name="next">Далее</string>
+
+    <!--Location picker screen-->
+    <string name="choose_place">Выберите место, где будет проходить ваше мероприятие</string>
+    <string name="address_autofill_query_hint">Неудаётся найти местоположение. Приблизьте</string>
+    <string name="address_autofill_pin_correction_note">Перетащите карту или напишите адрес, чтобы выбрать местоположение</string>
+    <string name="address_autofill_error_pin_correction">Неудаётся найти местоположение. Приблизьте</string>
+    <string name="back">Назад</string>
+
+    <!--Date&time picker screen-->
+    <string name="select_date_time">Выберите дату и время, когда состоится ваше мероприятие</string>
+    <string name="done">Готово</string>
+    <string name="date_location_and_cost_of_the_event">Дата и место проведения</string>
+    <string name="adress">Нью-Йорк, улица Эльбрус, 3</string>
+    <string name="where_adress">Спортивный клуб "ЙОД"</string>
+    <string name="choose_date">Выберите дату</string>
+    <string name="choose_time">Выберите время</string>
+    <string name="sunday">Воскресенье</string>
+    <string name="write_a_description_of_the_venue">Напишите описание</string>
+    <string name="save">Сохранить</string>
+    <string name="social">Общество</string>
+    <string name="entertainment">Развлечения</string>
+    <string name="family">Дети &amp; Семья</string>
+    <string name="education">Образование</string>
+    <string name="culture">Культура</string>
+    <string name="sport">Спорт</string>
+</resources>

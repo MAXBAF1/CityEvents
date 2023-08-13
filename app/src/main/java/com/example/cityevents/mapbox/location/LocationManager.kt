@@ -14,6 +14,7 @@ import com.mapbox.maps.plugin.gestures.gestures
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorBearingChangedListener
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
 import com.mapbox.maps.plugin.locationcomponent.location
+import com.mapbox.maps.plugin.scalebar.scalebar
 import okhttp3.internal.wait
 
 class LocationManager(private val mapView: MapView, private val context: Context) {
@@ -84,7 +85,8 @@ class LocationManager(private val mapView: MapView, private val context: Context
         mapboxMap.setCamera(CameraOptions.Builder().bearing(0.0).build())
 
         mapView.compass.fadeWhenFacingNorth = false
-        mapView.compass.marginTop = 600F
+        mapView.compass.marginTop = 1500F
+        mapView.scalebar.enabled = false
     }
 
 
