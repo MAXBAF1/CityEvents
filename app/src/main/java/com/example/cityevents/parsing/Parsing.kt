@@ -25,7 +25,7 @@ class Parsing(val context: Context) {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getEventsFromWeb(callback: (List<Event>) -> Unit) {
-        (context as AppCompatActivity).lifecycleScope.launch(Dispatchers.IO) {
+        (context as AppCompatActivity).lifecycleScope.launch(Dispatchers.Default) {
             TrustAllCertificates.enableTrustAllCertificates()
 
             for (i in 1..3) {
