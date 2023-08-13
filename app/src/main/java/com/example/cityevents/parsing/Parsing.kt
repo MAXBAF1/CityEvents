@@ -32,12 +32,22 @@ class Parsing(val context: Context) {
                 addNames(eventHtml)
                 addDates(eventHtml, index)
                 addCategories(eventHtml, index)
-
                 addPlaceNameAndAddress(eventHtml, index)
+                addImages(eventHtml, index)
+                addDescriptions(eventHtml, index)
             }
 
             callback(events)
         }
+    }
+
+    private fun addDescriptions(eventHtml: Element, eventIndex: Int) {
+        val desc = eventHtml.children()
+    }
+
+    private fun addImages(eventHtml: Element, eventIndex: Int) {
+        val image = eventHtml.children()[2].children()[0].children()[0].children()[0].attr("data-src").toString()
+        events[eventIndex].images = hashMapOf(Pair("", image))
     }
 
     private fun addPlaceNameAndAddress(eventHtml: Element, eventIndex: Int) {
