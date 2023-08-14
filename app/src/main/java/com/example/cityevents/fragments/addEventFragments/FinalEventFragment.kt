@@ -49,7 +49,7 @@ class FinalEventFragment(
 
     private fun setupViewPager() {
         if (event != null) binding.eventPicture.adapter =
-            event!!.images?.values?.let { FirebaseImageAdapter(it.toList()) }
+            event!!.images?.let { FirebaseImageAdapter(it.toList()) }
         else binding.eventPicture.adapter = eventModel.images.value?.let { ViewPagerAdapter(it) }
         binding.wormDotsIndicator.setViewPager2(binding.eventPicture)
     }

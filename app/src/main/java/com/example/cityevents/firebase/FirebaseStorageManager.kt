@@ -17,8 +17,7 @@ class FirebaseStorageManager {
 
                     // Добавьте ссылку на изображение в базу данных
                     val imagesRef = firebase.eventsRef.child(eventKey).child("images")
-                    val imageIds = imagesRef.push().key
-                    imagesRef.child(imageIds ?: "errorId").setValue(imageUrl.toString())
+                    imagesRef.child(imageId).setValue(imageUrl.toString())
                 }
             }
             .addOnFailureListener { exception ->

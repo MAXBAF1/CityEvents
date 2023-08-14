@@ -28,7 +28,7 @@ class Marker(private val context: Context, private val mapView: MapView) {
 
     fun addMarkerToMap(event: Event) {
         val drawable = AppCompatResources.getDrawable(context, R.drawable.ic_marker_orange)
-        val imageUrl = event.images?.values?.first() // Получаем ссылку на изображение
+        val imageUrl = event.images?.first() // Получаем ссылку на изображение
 
         val transformations = MultiTransformation(
             CenterCrop(), RoundedCorners(10)

@@ -1,9 +1,7 @@
 package com.example.cityevents.adapters
 
-import android.app.AlertDialog
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import android.icu.util.Calendar
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -14,13 +12,10 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.cityevents.R
 import com.example.cityevents.data.Event
 import com.example.cityevents.firebase.Firebase
 import com.example.cityevents.fragments.addEventFragments.FinalEventFragment
-import com.example.cityevents.fragments.eventsFragment.EventsFragment
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import java.text.DateFormatSymbols
 import java.util.Locale
@@ -74,7 +69,7 @@ class EventsAdapter(private val events: List<Event?>, context: Context) :
 
         @RequiresApi(Build.VERSION_CODES.N)
         fun bind(event: Event) {
-            val adapter = ViewPagerEventAdapter(event.images?.values!!.toList())
+            val adapter = ViewPagerEventAdapter(event.images!!)
             viewPager.adapter = adapter
             wormDotsIndicator.setViewPager2(viewPager)
 

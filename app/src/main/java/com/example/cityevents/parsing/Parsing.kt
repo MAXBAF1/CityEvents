@@ -22,7 +22,6 @@ class Parsing(val context: Context) {
     private val mainUrl = "https://afisha7.ru"
     private var events = mutableListOf<Event>()
 
-
     @RequiresApi(Build.VERSION_CODES.O)
     fun getEventsFromWeb(callback: (List<Event>) -> Unit) {
         (context as AppCompatActivity).lifecycleScope.launch(Dispatchers.Default) {
@@ -50,7 +49,7 @@ class Parsing(val context: Context) {
         var image = eventHtml.children()[2].children()[0].children()[0].children()[0].attr("data-src").toString()
         if (image.startsWith("/upload"))
             image = mainUrl + image
-        events[eventIndex].images = hashMapOf(Pair("", image))
+        events[eventIndex].images = arrayListOf(image)
     }
 
     private fun addPlaceNameAndAddress(eventHtml: Element, eventIndex: Int) {
@@ -70,7 +69,7 @@ class Parsing(val context: Context) {
 
         val address = doc.body()
             .children()[2].children()[0].children()[0].children()[0].children()[1].children()[1].children()[0].children()[1].childNodes()[2].toString()
-        events[eventIndex].placeAddress = address.replace(",", " ").replace(".", " ")
+        events[eventIndex].placeAddress = address
         events[eventIndex].location = getLocationFromAddress("Екатеринбург, $address")
     }
 
