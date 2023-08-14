@@ -6,5 +6,5 @@ A mobile mapping service with event mapping, you can easily find events that are
 
 
 
-![Иллюстрация к проекту](https://github.com/MAXBAF1/CityEvents/assets/63009846/fe38d5e6-1d80-44f2-89a2-909336551ea9)
+https://github.com/MAXBAF1/CityEvents/assets/63009846/fe38d5e6-1d80-44f2-89a2-909336551ea9
 
