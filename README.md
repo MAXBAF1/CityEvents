@@ -5,4 +5,6 @@ A mobile mapping service with event mapping, you can easily find events that are
 [See CityEvents\`s Presentation](https://www.canva.com/design/DAFrZZUcryw/2bgeJsRiT6EUgR3X-AgD_Q/edit?utm_content=DAFrZZUcryw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 
-![Иллюстрация к проекту](https://github.com/MAXBAF1/CityEvents/blob/master/screenrecorder-2023-08-13-12-14-59-72_sJgmDmd9.mp4)
+
+![Иллюстрация к проекту](https://github.com/MAXBAF1/CityEvents/assets/63009846/fe38d5e6-1d80-44f2-89a2-909336551ea9)
+
